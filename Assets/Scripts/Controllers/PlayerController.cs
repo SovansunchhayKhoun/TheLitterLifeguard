@@ -6,13 +6,21 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody player;
     public float moveSpeed = 10f;
+    public float rotationSpeed = 720f;
     private Animator animator;
 
 
     void Start()
     {
+        InitGame();
+    }
+
+    private void InitGame()
+    {
         player = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        moveSpeed = 10f;
+        rotationSpeed = 720f;
     }
 
     void Update()
@@ -28,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
         // Create a movement vector
         Vector3 movement = new(moveX, 0, moveZ);
+        movement.Normalize();
 
         // Set animation speed parameter based on movement
         float speed = movement.magnitude;
@@ -35,5 +44,12 @@ public class PlayerController : MonoBehaviour
 
         // Move the game object
         transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
+
+        if (movement != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        }
     }
 }
