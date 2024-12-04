@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
         // Create a movement vector
         Vector3 movement = new(moveX, 0, moveZ);
+        float magnitude = Mathf.Clamp01(movement.magnitude) * moveSpeed;
         movement.Normalize();
 
         // Set animation speed parameter based on movement
@@ -43,7 +44,8 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", speed);
 
         // Move the game object
-        transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
+        Vector3 velocity = movement * magnitude;
+        transform.Translate(velocity * Time.deltaTime, Space.World);
 
         if (movement != Vector3.zero)
         {
