@@ -9,13 +9,13 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 720f;
     public float jumpForce = 5f;
     private Animator animator;
-    private bool isGrounded;
 
     [Header("Ground Check Settings")]
     public Transform groundCheck; // Empty object at the player's feet
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer; // Layer mask to identify ground
 
+    private bool isGrounded;
     private float xRotation;
     public float mouseSensitivity = 1f;
 
@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 10f;
         rotationSpeed = 720f;
         jumpForce = 5f;
-        isGrounded = true;
     }
 
     void Update()
@@ -68,12 +67,13 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
-        // Perform ground check
+        // Check if the player is grounded
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
 
+        // Jump logic
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            player.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            player.velocity = new Vector3(player.velocity.x, jumpForce, player.velocity.z);
             animator.SetBool("Jump", true);
         }
         else
