@@ -11,6 +11,14 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool isGrounded;
 
+    [Header("Ground Check Settings")]
+    public Transform groundCheck; // Empty object at the player's feet
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer; // Layer mask to identify ground
+
+    private float xRotation;
+    public float mouseSensitivity = 1f;
+
     void Start()
     {
         InitGame();
@@ -30,64 +38,47 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
-        // HandleMouseMovement();
     }
 
     private void HandleMovement()
     {
-        // Get input from the user
         float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right arrow keys
-        float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down arrow keys
+        float moveZ = Input.GetAxis("Vertical"); // W/S or Up/Down arrow keys
 
-        // Create a movement vector
         Vector3 movement = new(moveX, 0, moveZ);
         float magnitude = Mathf.Clamp01(movement.magnitude) * moveSpeed;
         movement.Normalize();
 
-        // Set animation speed parameter based on movement
         float speed = magnitude / moveSpeed; // Normalize the speed for the animator
         animator.SetFloat("Speed", speed);
 
-        // Apply movement
         Vector3 velocity = movement * magnitude;
         transform.Translate(velocity * Time.deltaTime, Space.World);
 
         if (movement != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                toRotation,
+                rotationSpeed * Time.deltaTime
+            );
         }
     }
 
     private void HandleJump()
     {
+        // Perform ground check
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            // Apply jump force
             player.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             animator.SetBool("Jump", true);
-
-            // Set grounded status to false
-            isGrounded = false;
         }
-    }
-    private float xRotation;
-    public float mouseSensitivity = 1f;
-    private void HandleMouseMovement()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        xRotation -= mouseY;
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // Check if the player has landed on the ground
-        if (collision.gameObject.CompareTag("Ground"))
+        else
         {
-            isGrounded = true;
+            animator.SetBool("Jump", false);
         }
     }
 }
