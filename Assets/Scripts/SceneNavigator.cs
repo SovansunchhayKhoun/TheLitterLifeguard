@@ -15,5 +15,9 @@ public class SceneNavigator : MonoBehaviour
   {
     SceneManager.LoadScene("LevelScreen");
   }
+  public void ToGame()
+  {
+    SceneManager.LoadScene("GameScreen");
+  }
 
 }
