@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class CameraSwitch : MonoBehaviour
 {
-    public CinemachineVirtualCamera thirdPersonCamera; // Assign the third-person camera
+    public CinemachineFreeLook thirdPersonCamera; // Assign the third-person camera
     public CinemachineVirtualCamera firstPersonCamera; // Assign the first-person camera
-    private bool isFirstPerson = false; // Track the current camera state
+    public static bool isFirstPerson = false; // Track the current camera state
+
+    void Start()
+    {
+        isFirstPerson = true;
+        firstPersonCamera.Priority = 10;
+        thirdPersonCamera.Priority = 0;
+    }
 
     void Update()
     {
