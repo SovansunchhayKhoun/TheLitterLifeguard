@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScreen.unity
     guid: 166bf222079b82e4eb6ca1a512b2ef74
+  - enabled: 1
+    path: Assets/Forest Pack/Scenes/DemoScene 1.unity
+    guid: 40dd6d33776ea49bd80158331db2427c
   m_configObjects: {}

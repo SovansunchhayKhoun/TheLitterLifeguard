@@ -17,7 +17,7 @@ public class SceneNavigator : MonoBehaviour
   }
   public void ToGame()
   {
-    SceneManager.LoadScene("GameScreen");
+    SceneManager.LoadScene("DemoScene 1");
   }
 
 }
