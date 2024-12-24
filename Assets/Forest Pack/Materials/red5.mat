@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Color0014
+  m_Name: red5
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_Parent: {fileID: 2100000, guid: e2a4e456882658f498c2e675adc6a507, type: 2}
+  m_Parent: {fileID: 2100000, guid: c3b68e0054d3d544c8678c5d79770915, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -26,5 +26,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Color: {r: 0.3680988, g: 0.87058824, b: 0.1764706, a: 1}
+    - _Color: {r: 0.6431373, g: 0.17254901, b: 0.19007665, a: 1}
   m_BuildTextureStacks: []
