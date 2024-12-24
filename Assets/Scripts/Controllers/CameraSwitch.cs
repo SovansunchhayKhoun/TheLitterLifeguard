@@ -6,14 +6,15 @@ using UnityEngine;
 public class CameraSwitch : MonoBehaviour
 {
     public CinemachineFreeLook thirdPersonCamera; // Assign the third-person camera
-    public CinemachineVirtualCamera firstPersonCamera; // Assign the first-person camera
+    // public CinemachineVirtualCamera firstPersonCamera; // Assign the first-person camera
+    public Camera firstPersonCamera; // Assign the first-person camera
     public static bool isFirstPerson = false; // Track the current camera state
 
     void Start()
     {
         isFirstPerson = true;
-        firstPersonCamera.Priority = 10;
-        thirdPersonCamera.Priority = 0;
+        firstPersonCamera.enabled = true;
+        thirdPersonCamera.enabled = false;
     }
 
     void Update()
@@ -32,14 +33,14 @@ public class CameraSwitch : MonoBehaviour
         if (isFirstPerson)
         {
             // Switch to first-person camera
-            firstPersonCamera.Priority = 10;
-            thirdPersonCamera.Priority = 0;
+            firstPersonCamera.enabled = true;
+            thirdPersonCamera.enabled = false;
         }
         else
         {
             // Switch to third-person camera
-            firstPersonCamera.Priority = 0;
-            thirdPersonCamera.Priority = 10;
+            firstPersonCamera.enabled = false;
+            thirdPersonCamera.enabled = true;
         }
     }
 }

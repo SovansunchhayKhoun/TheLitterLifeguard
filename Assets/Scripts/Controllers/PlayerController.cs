@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private float xRotation;
-    public float mouseSensitivity = 1f;
+    public float fppMouseSensitivity = 50f;
+    public float tppMouseSensitivity = 1f;
 
     // Add the Camera and aiming logic
     public Transform playerCamera;
@@ -37,13 +38,15 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        playerCamera = Camera.main.transform; // Use the main camera for first-person view
+        // playerCamera = Camera.main.transform; // Use the main camera for first-person view
+
         Cursor.lockState = CursorLockMode.Locked; // Locks cursor to the center of the screen
         Cursor.visible = false; // Hides the cursor
 
         moveSpeed = 10f;
         rotationSpeed = 720f;
         jumpForce = 5f;
+        fppMouseSensitivity = 50f;
 
         if (thirdPersonCamera != null)
         {
@@ -138,22 +141,22 @@ public class PlayerController : MonoBehaviour
         // Rotate the camera (pitch) based on mouse Y input (up and down)
         if (CameraSwitch.isFirstPerson)
         {
-            float mouseX = Input.GetAxis("Mouse X");
-            float mouseY = Input.GetAxis("Mouse Y");
+            float mouseX = Input.GetAxis("Mouse X") * fppMouseSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * fppMouseSensitivity * Time.deltaTime;
 
             // Rotate camera up/down (pitch)
-            xRotation -= mouseY * mouseSensitivity;
+            xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -pitchRange, pitchRange); // Clamping the pitch to avoid extreme angles
 
             playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Apply the pitch
 
             // Rotate the player (Yaw) based on mouse X input (left and right)
-            transform.Rotate(Vector3.up * mouseX * mouseSensitivity); // Yaw
+            transform.Rotate(Vector3.up * mouseX); // Yaw
         }
         else
         {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+            float mouseX = Input.GetAxis("Mouse X") * tppMouseSensitivity;
+            float mouseY = Input.GetAxis("Mouse Y") * tppMouseSensitivity;
 
             transform.Rotate(Vector3.up * mouseX); // Rotate player for yaw
 
@@ -164,7 +167,6 @@ public class PlayerController : MonoBehaviour
             thirdPersonCamera.m_YAxis.Value -= mouseY * Time.deltaTime;
 
             thirdPersonCamera.m_YAxis.Value = Mathf.Clamp(thirdPersonCamera.m_YAxis.Value, 0.3f, 0.8f);
-
         }
     }
 }
