@@ -2,11 +2,18 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class mainmenu : MonoBehaviour {
+public class mainmenu : MonoBehaviour
+{
 
     public Canvas menu;
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
-    public void starGame(){
+    public void starGame()
+    {
         menu.enabled = false;
     }
 
