@@ -5,4 +5,5 @@ class SceneNameEnum
   public const string APPEARANCE_SCREEN = "AppearanceScreen";
   public const string LEVEL_SCREEN = "LevelScreen";
   public const string GAME_SCREEN = "GameScreen";
+  public const string RAY_CASTING = "RayCasting";
 }

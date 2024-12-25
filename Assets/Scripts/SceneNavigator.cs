@@ -17,7 +17,7 @@ public class SceneNavigator : MonoBehaviour
   }
   public void ToGame()
   {
-    SceneManager.LoadScene(SceneNameEnum.GAME_SCREEN);
+    SceneManager.LoadScene(SceneNameEnum.RAY_CASTING);
   }
   public static void ToSortingScene()
   {
