@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private float xRotation;
-    public float fppMouseSensitivity = 50f;
+    public float fppMouseSensitivity = 100f;
     public float tppMouseSensitivity = 1f;
 
     // Add the Camera and aiming logic
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 10f;
         rotationSpeed = 720f;
         jumpForce = 5f;
-        fppMouseSensitivity = 50f;
+        fppMouseSensitivity = 100f;
 
         if (thirdPersonCamera != null)
         {
