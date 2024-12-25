@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Required for scene loading
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AppearanceSelector : MonoBehaviour
@@ -30,6 +30,6 @@ public class AppearanceSelector : MonoBehaviour
         Debug.Log(male ? "Male Selected" : "Female Selected");
 
         // Load the game scene directly
-        SceneManager.LoadScene("DemoScene 1");
+        SceneManager.LoadScene("RayCasting");  // Adjust scene name as needed
     }
 }
