@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class RayCast : MonoBehaviour
@@ -10,16 +11,19 @@ public class RayCast : MonoBehaviour
     void Update()
     {
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
-
-        if (Physics.Raycast(ray, out hitInfo, 20f, targetLayerMask))
+        if (Input.GetMouseButton(0))
         {
-            Debug.Log("Hit something");
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitInfo.distance, Color.red);
-        }
-        else
-        {
-            Debug.Log("Nothing");
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20f, Color.green);
+            if (Physics.Raycast(ray, out hitInfo, 20f, targetLayerMask))
+            {
+                Debug.Log("Hit something", hitInfo.collider.gameObject);
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitInfo.distance, Color.red);
+                SceneNavigator.ToSortingScene();
+            }
+            else
+            {
+                Debug.Log("Nothing");
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20f, Color.green);
+            }
         }
     }
 }
