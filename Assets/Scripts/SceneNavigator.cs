@@ -24,19 +24,22 @@ public class SceneNavigator : MonoBehaviour
     }
   public void ToStart()
   {
-    SceneManager.LoadScene("StartScreen");
+    SceneManager.LoadScene(SceneNameEnum.START_SCREEN);
   }
   public void ToAppearance()
   {
-    SceneManager.LoadScene("AppearanceScreen");
+    SceneManager.LoadScene(SceneNameEnum.APPEARANCE_SCREEN);
   }
   public void ToLevel()
   {
-    SceneManager.LoadScene("LevelScreen");
+    SceneManager.LoadScene(SceneNameEnum.LEVEL_SCREEN);
   }
   public void ToGame()
   {
-    SceneManager.LoadScene("DemoScene 1");
+    SceneManager.LoadScene(SceneNameEnum.GAME_SCREEN);
   }
-
+  public static void ToSortingScene()
+  {
+    SceneManager.LoadScene(SceneNameEnum.SORTING_SCENE);
+  }
 }
