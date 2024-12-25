@@ -17,4 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScreen.unity
     guid: 166bf222079b82e4eb6ca1a512b2ef74
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 04060efa256c00f4c9bbd7fc216d564b
+  - enabled: 1
+    path: Assets/Scenes/SortingScene.unity
+    guid: 779a7c1ab9582ba49a847d90ac8bade5
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: beda9f2021a174bf199368025542e973
+  - enabled: 1
+    path: Assets/Scenes/TrashScenes.unity
+    guid: 7ab1a16a57a2a454999531e3cdb16001
   m_configObjects: {}
