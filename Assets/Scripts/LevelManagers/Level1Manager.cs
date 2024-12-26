@@ -5,20 +5,29 @@ using UnityEngine.UI;
 class Level1Manager : MonoBehaviour
 {
   public Text timer;
-  public static float time = 120f;
-
+  public static float time = 30f;
   public void Start()
   {
     UpdateTimerDisplay();
-    StartCoroutine(Countdown());
+    InitGame();
+    // StartCoroutine(Countdown());
+  }
+  void Update()
+  {
+    Countdown();
   }
 
-  private IEnumerator Countdown()
+  private void InitGame()
   {
-    while (time > 0)
+    time = 30f;
+    UpdateTimerDisplay();
+  }
+
+  private void Countdown()
+  {
     {
-      yield return new WaitForSeconds(1f);
-      time -= 1;
+      // yield return new WaitForSeconds(1f);
+      time -= Time.deltaTime;
       UpdateTimerDisplay();
     }
 
