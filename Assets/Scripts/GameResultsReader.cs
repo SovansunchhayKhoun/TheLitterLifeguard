@@ -33,7 +33,7 @@ public class GameResultsReader : MonoBehaviour
     else
     {
       Debug.LogWarning("GameResults.txt not found.");
-      resultsText.text = "Points: 0";
+      resultsText.text = "0";
     }
   }
 }
