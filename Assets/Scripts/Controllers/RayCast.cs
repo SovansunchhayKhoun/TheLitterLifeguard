@@ -34,7 +34,6 @@ public class RayCast : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            // animator.SetTrigger("FishingCast");
             if (Physics.Raycast(ray, out hitInfo, 20f, targetLayerMask))
             {
                 // Update the line to end at the hit point
