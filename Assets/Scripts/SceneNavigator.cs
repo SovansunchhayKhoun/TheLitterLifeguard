@@ -34,9 +34,17 @@ public class SceneNavigator : MonoBehaviour
   {
     SceneManager.LoadScene(SceneNameEnum.LEVEL_SCREEN);
   }
-  public void ToGame()
+  public void ToLevel1()
   {
     SceneManager.LoadScene(SceneNameEnum.RAY_CASTING);
+  }
+  public void ToLevel2()
+  {
+    SceneManager.LoadScene(SceneNameEnum.LEVEL_2);
+  }
+  public void ToLevel3()
+  {
+    SceneManager.LoadScene(SceneNameEnum.LEVEL_3);
   }
   public static void ToSortingScene()
   {
