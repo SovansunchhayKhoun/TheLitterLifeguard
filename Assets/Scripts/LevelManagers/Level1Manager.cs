@@ -5,7 +5,7 @@ using UnityEngine.UI;
 class Level1Manager : MonoBehaviour
 {
   public Text timer;
-  private int time = 5;
+  private int time = 120;
 
   public void Start()
   {
