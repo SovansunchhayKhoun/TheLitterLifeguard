@@ -23,7 +23,7 @@ public class RayCast : MonoBehaviour
         lineRenderer.positionCount = 2;
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = Color.green;
-        lineRenderer.endColor = Color.red;
+        lineRenderer.endColor = Color.black;
     }
 
     // Update is called once per frame
@@ -38,8 +38,8 @@ public class RayCast : MonoBehaviour
             {
                 // Update the line to end at the hit point
                 lineRenderer.SetPosition(1, hitInfo.point);
-                lineRenderer.startColor = Color.red;
-                lineRenderer.endColor = Color.red;
+                lineRenderer.startColor = Color.green;
+                lineRenderer.endColor = Color.green;
 
                 fishingRodSfx.PlaySuccessFishCast();
                 StartCoroutine(WaitForNextScene(fishingRodSfx.GetSuccessFishCastClip().length));
@@ -48,8 +48,8 @@ public class RayCast : MonoBehaviour
             {
                 // No hit, extend line to full ray distance
                 lineRenderer.SetPosition(1, transform.position + transform.TransformDirection(Vector3.forward) * 20f);
-                lineRenderer.startColor = Color.green;
-                lineRenderer.endColor = Color.green;
+                lineRenderer.startColor = Color.black;
+                lineRenderer.endColor = Color.black;
 
                 fishingRodSfx.PlayMissFishCast();
             }
