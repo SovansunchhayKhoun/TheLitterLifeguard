@@ -7,12 +7,14 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TMP_Text pointCounter;
-    int points = 0;
+    public int points = 0;
     [SerializeField] TMP_Text timer;
     private float timeRemaining = 60f;
     private bool timerIsRunning = false;
     [SerializeField] GameObject[] tooltips;
     [SerializeField] TrashInteract trashManager;
+    public GameObject gameOverPanel;
+    public GameObject victoryPanel;
     public bool canClick = false;
     public float uiDisableTime = 0.25f;
 
