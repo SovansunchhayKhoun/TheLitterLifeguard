@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Text pointCounter;
     int points = 0;
     [SerializeField] TMP_Text timer;
-    private float timeRemaining = 60f;
+    // private float timeRemaining = 60f;
     private bool timerIsRunning = false;
     [SerializeField] GameObject[] tooltips;
     [SerializeField] TrashInteract trashManager;
@@ -42,13 +42,13 @@ public class UIManager : MonoBehaviour
             return;
 
         if (timerIsRunning) {
-            if (timeRemaining > 0) {
-                timeRemaining -= Time.deltaTime;
-                DisplayTime(timeRemaining);
+            if (Level1Manager.time > 0) {
+                Level1Manager.time -= Time.deltaTime;
+                DisplayTime(Level1Manager.time);
             }
             else {
                 Debug.Log("Time's up!");
-                timeRemaining = 0;
+                Level1Manager.time = 0;
                 timerIsRunning = false;
             }
         }
