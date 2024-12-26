@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 1069060110}
   - component: {fileID: 1069060109}
   m_Layer: 0
-  m_Name: ScenceNavigator
+  m_Name: SceneNavigator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
