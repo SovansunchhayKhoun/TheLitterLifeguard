@@ -400,7 +400,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1069060109}
         m_TargetAssemblyTypeName: SceneNavigator, Assembly-CSharp
-        m_MethodName: ToAppearance
+        m_MethodName: ToStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
