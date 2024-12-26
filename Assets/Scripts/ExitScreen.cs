@@ -18,14 +18,16 @@ public class ExitScreen : MonoBehaviour
         isOpen = !isOpen;
         menu.SetActive(isOpen);
 
-        // if (isOpen)
-        // {
-        //     Time.timeScale = 0;
-        // }
-        // else
-        // {
-        //     Time.timeScale = 1;
-        // }
+        if (isOpen)
+        {
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
     public void Resume()
     {
@@ -33,11 +35,12 @@ public class ExitScreen : MonoBehaviour
         isOpen = false;
         menu.SetActive(false);
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public void Exit()
     {
         Debug.Log("Exit Game");
-        // Time.timeScale = 1;
-        // Application.Quit();
+        Time.timeScale = 1;
+        Application.Quit();
     }
 }
