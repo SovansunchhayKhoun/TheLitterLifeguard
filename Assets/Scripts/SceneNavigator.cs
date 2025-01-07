@@ -5,19 +5,19 @@ public class SceneNavigator : MonoBehaviour
 {
   public void ToStart()
   {
-    SceneManager.LoadScene(SceneNameEnum.START_SCREEN);
+    SceneManager.LoadScene(SceneNameEnum.START_SCENE);
   }
   public void ToAppearance()
   {
-    SceneManager.LoadScene(SceneNameEnum.APPEARANCE_SCREEN);
+    SceneManager.LoadScene(SceneNameEnum.APPEARANCE_SCENE);
   }
   public void ToLevel()
   {
-    SceneManager.LoadScene(SceneNameEnum.LEVEL_SCREEN);
+    SceneManager.LoadScene(SceneNameEnum.LEVEL_SCENE);
   }
   public void ToLevel1()
   {
-    SceneManager.LoadScene(SceneNameEnum.RAY_CASTING);
+    SceneManager.LoadScene(SceneNameEnum.LEVEL_1);
   }
   public void ToLevel2()
   {
