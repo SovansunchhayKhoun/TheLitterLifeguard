@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleMouseLook();
         HandleJump();
+        HandleFishing();
     }
 
     private void HandleMovement()
@@ -71,6 +72,18 @@ public class PlayerController : MonoBehaviour
         else
         {
             HandleTPPMovement();
+        }
+    }
+
+    private void HandleFishing()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            animator.SetBool("FishingCast", true);
+        }
+        else
+        {
+            animator.SetBool("FishingCast", false);
         }
     }
 
