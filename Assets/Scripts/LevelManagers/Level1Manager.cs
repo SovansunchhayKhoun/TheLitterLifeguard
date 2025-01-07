@@ -25,14 +25,18 @@ class Level1Manager : MonoBehaviour
 
   private void Countdown()
   {
+    if (time > 0)
     {
       // yield return new WaitForSeconds(1f);
       time -= Time.deltaTime;
       UpdateTimerDisplay();
     }
+    else
+    {
+      // Game Over when timer hits 0
+      Debug.Log("Game over");
+    }
 
-    // Game Over when timer hits 0
-    Debug.Log("Game over");
   }
 
   private void UpdateTimerDisplay()

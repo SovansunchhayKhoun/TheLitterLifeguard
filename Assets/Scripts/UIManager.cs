@@ -8,12 +8,16 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TMP_Text pointCounter;
-    int points = 0;
+    public int points = 0;
     [SerializeField] TMP_Text timer;
     // private float timeRemaining = 60f;
     private bool timerIsRunning = false;
     [SerializeField] GameObject[] tooltips;
     [SerializeField] TrashInteract trashManager;
+    public GameObject gameOverPanel;
+    public UIManager uiManager; // Reference to the UIManager script
+    public TextMeshProUGUI titleText; // Reference to the UI Text component
+    public TextMeshProUGUI scoreText; // Reference to the UI Text component
     public bool canClick = false;
     public float uiDisableTime = 0.25f;
 
@@ -25,11 +29,13 @@ public class UIManager : MonoBehaviour
             return;
 
         DisplayTooltip(4, true, 0f);
+        uiManager.gameOverPanel.SetActive(false); // Hide the Game Over panel initially
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        uiManager.gameOverPanel.SetActive(false); // Hide the Game Over panel initially
         if (isMenu)
             return;
 
@@ -55,7 +61,24 @@ public class UIManager : MonoBehaviour
                 Level1Manager.time = 0;
                 timerIsRunning = false;
                 SaveGameResults();
+                GameOver();
             }
+        }
+    }
+
+    public void GameOver()
+    {
+        scoreText.text = uiManager.points.ToString();
+        uiManager.gameOverPanel.SetActive(true);
+        if (uiManager.points > 0)
+        {
+            Debug.Log("You Win");
+            titleText.text = "You Win";
+        }
+        else
+        {
+            Debug.Log("Game Over");
+            titleText.text = "Game Over";
         }
     }
 
