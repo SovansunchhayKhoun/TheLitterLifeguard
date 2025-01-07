@@ -46,26 +46,31 @@ public class VerletLine : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // On left-click, cast
         {
-            // Cast out the line
-            // A generic delay because I don't know the timing of casting out a fishing line and when that line comes out
-            // I'm assuming at the peak of the cast, idk
-            StartCoroutine(IncreaseLengthAfterDelay(Delay));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f))
+            {
+                Debug.Log("Hook aimed at: " + hitInfo.point);
 
+                // Set EndPoint to the raycast hit location
+                EndPoint.position = hitInfo.point;
+
+                // Start casting
+                StartCoroutine(IncreaseLengthAfterDelay(Delay));
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.Q)) // On "Q", reel in
         {
-            // Reel In
             currentTargetLength = startSegmentLength;
             isChangingLength = true;
         }
 
+        // Adjust line length smoothly
         if (isChangingLength)
         {
             SegmentLength = Mathf.Lerp(SegmentLength, currentTargetLength, LerpSpeed * Time.deltaTime);
 
-            // Stop changing the line length when it's close enough to the min
             if (Mathf.Abs(SegmentLength - currentTargetLength) < 0.01f)
             {
                 SegmentLength = currentTargetLength;
