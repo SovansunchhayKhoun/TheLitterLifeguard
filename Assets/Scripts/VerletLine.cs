@@ -13,7 +13,7 @@ public class VerletLine : MonoBehaviour
     public float SegmentLength = 0.03f;
     public float startSegmentLength = 0.03f;
     public float currentTargetLength = 0.03f;
-    public float maxSegmentLength = 0.15f;
+    public float maxSegmentLength = 0.4f;
     public Vector3 Gravity = new Vector3(0, -9.81f, 0);
     // Num of Physics iterations
     public int Iterations = 6;
