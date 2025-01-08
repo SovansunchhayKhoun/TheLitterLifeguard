@@ -1,4 +1,0 @@
-Game Over!
-Points: 0
-Time Remaining: 0 seconds
-Date: 2025-01-01 23:13:48
