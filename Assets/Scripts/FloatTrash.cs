@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class floatTrash : MonoBehaviour
 {
-    public float amplitude = 0.07f; // Height of the floating motion
+    public float amplitude = 0.7f; // Height of the floating motion
     public float frequency = 1f;  // Speed of the floating motion
 
     void Start()
     {
         frequency = 3f;
+        amplitude = 0.7f;
     }
 
     void Update()
