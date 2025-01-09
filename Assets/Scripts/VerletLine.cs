@@ -153,7 +153,11 @@ public class VerletLine : MonoBehaviour
     // Update the line with Verlet Physics.
     void FixedUpdate()
     {
+        UpdateVerletLine();
+    }
 
+    private void UpdateVerletLine()
+    {
         foreach (var p in particles)
         {
             Verlet(p, Time.fixedDeltaTime);
