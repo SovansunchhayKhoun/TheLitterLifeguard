@@ -10,19 +10,21 @@ public class VerletLine : MonoBehaviour
     public Transform EndPoint;
     public int Segments = 10;
     public LineRenderer lineRenderer;
-    public float SegmentLength = 0.03f;
-    public float startSegmentLength = 0.03f;
-    public float currentTargetLength = 0.03f;
-    public float maxSegmentLength = 0.4f;
-    public Vector3 Gravity = new Vector3(0, -9.81f, 0);
+    public float SegmentLength;
+    public float startSegmentLength;
+    public float currentTargetLength;
+    public float maxSegmentLength;
+    public Vector3 Gravity = new(0, -9.81f, 0);
     // Num of Physics iterations
     public int Iterations = 6;
     // higher is stiffer, lower is stretchier
-    public float tensionConstant = 10f;
+    public float tensionConstant;
     public bool SecondHasRigidbody = false;
-    public float LerpSpeed = 1f;
-    public float Delay = 3f;
+    public float LerpSpeed;
     private bool isChangingLength = false;
+    public GameObject MarkerPrefab; // Drag a marker prefab (like a sphere) here in the inspector.
+    private GameObject markerInstance;
+    private bool isReeling = false;
 
     // Represents a segment of the line.
     private class LineParticle
@@ -31,11 +33,110 @@ public class VerletLine : MonoBehaviour
         public Vector3 OldPos;
         public Vector3 Acceleration;
     }
-
     private List<LineParticle> particles;
+
     // Initializes the line.
     void Start()
     {
+        InitVerletLine();
+    }
+
+    void Update()
+    {
+        RaycastHit _rayCastHit = RayCast.castHookHitInfo;
+        GameObject _attachedObject = RayCast.attachedObject;
+
+        if (!isReeling && _rayCastHit.point != new Vector3(0, 0, 0))
+        {
+            EndPoint.position = _rayCastHit.point; // Update the endpoint position
+        }
+
+        if (Input.GetMouseButtonDown(0)) // On left-click, cast
+        {
+            EndPoint.position = _rayCastHit.point; // Update the endpoint position
+            isReeling = false;
+        }
+        else if (Input.GetKey(KeyCode.Q) && !isReeling) // On "Q", reel in
+        {
+            StartReeling(raycastHit: _rayCastHit);
+        }
+
+        // Adjust line length smoothly
+        if (isChangingLength)
+        {
+            AdjustLineLength(_attachedObject);
+        }
+    }
+
+    private void StartReeling(RaycastHit raycastHit)
+    {
+        currentTargetLength = startSegmentLength;
+        isChangingLength = true;
+        isReeling = true;
+
+        if (raycastHit.point != new Vector3(0, 0, 0))
+        {
+            EndPoint.position = raycastHit.point; // Update the endpoint position
+                                                  // Move and show the marker at the hit position
+            if (markerInstance)
+            {
+                markerInstance.transform.position = raycastHit.point;
+                markerInstance.SetActive(true);
+            }
+        }
+    }
+
+    private void AdjustLineLength(GameObject attachedObject)
+    {
+        SegmentLength = Mathf.Lerp(SegmentLength, currentTargetLength, LerpSpeed * Time.deltaTime);
+
+        if (Mathf.Abs(SegmentLength - currentTargetLength) < 0.01f)
+        {
+            SegmentLength = currentTargetLength;
+            isChangingLength = false;
+
+            // If reeling in, attach the hit object to the endpoint
+            if (isReeling && attachedObject != null && SegmentLength == startSegmentLength)
+            {
+                AttachTrash(attachedObject);
+            }
+        }
+    }
+    private void AttachTrash(GameObject attachedObject)
+    {
+        var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale
+
+        attachedObject.transform.SetParent(EndPoint);
+        attachedObject.transform.localPosition = Vector3.zero; // Reset local position
+        attachedObject.transform.localRotation = Quaternion.identity; // Reset local rotation
+
+        // Calculate the local scale to maintain the original lossy scale
+        attachedObject.transform.localScale = new Vector3(
+            originalLossyScale.x / EndPoint.lossyScale.x,
+            originalLossyScale.y / EndPoint.lossyScale.y,
+            originalLossyScale.z / EndPoint.lossyScale.z
+        );
+
+        // disable the attached object's Rigidbody to prevent physics interference
+        Rigidbody attachedRigidbody = attachedObject.GetComponent<Rigidbody>();
+        if (attachedRigidbody != null)
+        {
+            attachedRigidbody.isKinematic = true;
+        }
+    }
+
+    private void InitVerletLine()
+    {
+        LerpSpeed = 1f;
+        tensionConstant = 1000f;
+
+        SegmentLength = 0.03f;
+        startSegmentLength = 0.03f;
+        currentTargetLength = 0.03f;
+        maxSegmentLength = 0.4f;
+        isReeling = false;
+        isChangingLength = false;
+
         particles = new List<LineParticle>();
         for (int i = 0; i < Segments; i++)
         {
@@ -43,48 +144,23 @@ public class VerletLine : MonoBehaviour
             particles.Add(new LineParticle { Pos = point, OldPos = point, Acceleration = Gravity });
         }
         lineRenderer.positionCount = particles.Count;
-    }
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+
+        // Instantiate marker and deactivate it initially
+        if (MarkerPrefab)
         {
-            // Cast out the line
-            // A generic delay because I don't know the timing of casting out a fishing line and when that line comes out
-            // I'm assuming at the peak of the cast, idk
-            StartCoroutine(IncreaseLengthAfterDelay(Delay));
-
+            markerInstance = Instantiate(MarkerPrefab);
+            markerInstance.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            // Reel In
-            currentTargetLength = startSegmentLength;
-            isChangingLength = true;
-        }
-
-        if (isChangingLength)
-        {
-            SegmentLength = Mathf.Lerp(SegmentLength, currentTargetLength, LerpSpeed * Time.deltaTime);
-
-            // Stop changing the line length when it's close enough to the min
-            if (Mathf.Abs(SegmentLength - currentTargetLength) < 0.01f)
-            {
-                SegmentLength = currentTargetLength;
-                isChangingLength = false;
-            }
-        }
-    }
-
-    private IEnumerator IncreaseLengthAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        currentTargetLength = maxSegmentLength;
-        isChangingLength = true;
     }
 
     // Update the line with Verlet Physics.
     void FixedUpdate()
     {
+        UpdateVerletLine();
+    }
 
+    private void UpdateVerletLine()
+    {
         foreach (var p in particles)
         {
             Verlet(p, Time.fixedDeltaTime);
