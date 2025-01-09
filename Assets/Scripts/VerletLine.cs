@@ -38,6 +38,7 @@ public class VerletLine : MonoBehaviour
     // Initializes the line.
     void Start()
     {
+        Delay = 1.5f;
         particles = new List<LineParticle>();
         for (int i = 0; i < Segments; i++)
         {
@@ -55,25 +56,26 @@ public class VerletLine : MonoBehaviour
     }
     void Update()
     {
+        RaycastHit _rayCastHit = RayCast.hitInfo;
+        Debug.Log(_rayCastHit.point);
+        GameObject _attachedObject = RayCast.attachedObject;
         if (Input.GetMouseButtonDown(0)) // On left-click, cast
         {
             // Start casting
             StartCoroutine(IncreaseLengthAfterDelay(Delay));
         }
-        else if (Input.GetKeyDown(KeyCode.Q)) // On "Q", reel in
+        else if (Input.GetKey(KeyCode.Q)) // On "Q", reel in
         {
             currentTargetLength = startSegmentLength;
             isChangingLength = true;
 
-            if (RayCast.hitInfo.point != new Vector3(0, 0, 0))
+            if (_rayCastHit.point != new Vector3(0, 0, 0))
             {
-                Debug.Log("Hook aimed at: " + RayCast.hitInfo.point);
-                EndPoint.position = RayCast.hitInfo.point; // Update the endpoint position
-
+                EndPoint.position = _rayCastHit.point; // Update the endpoint position
                 // Move and show the marker at the hit position
                 if (markerInstance)
                 {
-                    markerInstance.transform.position = RayCast.hitInfo.point;
+                    markerInstance.transform.position = _rayCastHit.point;
                     markerInstance.SetActive(true);
                 }
             }
@@ -88,6 +90,30 @@ public class VerletLine : MonoBehaviour
             {
                 SegmentLength = currentTargetLength;
                 isChangingLength = false;
+
+                // If reeling in, attach the hit object to the endpoint
+                if (_attachedObject != null && SegmentLength == startSegmentLength)
+                {
+                    var originalLossyScale = _attachedObject.transform.lossyScale; // Store lossy scale
+
+                    _attachedObject.transform.SetParent(EndPoint);
+                    _attachedObject.transform.localPosition = Vector3.zero; // Reset local position
+                    _attachedObject.transform.localRotation = Quaternion.identity; // Reset local rotation
+
+                    // Calculate the local scale to maintain the original lossy scale
+                    _attachedObject.transform.localScale = new Vector3(
+                        originalLossyScale.x / EndPoint.lossyScale.x,
+                        originalLossyScale.y / EndPoint.lossyScale.y,
+                        originalLossyScale.z / EndPoint.lossyScale.z
+                    );
+
+                    // disable the attached object's Rigidbody to prevent physics interference
+                    Rigidbody attachedRigidbody = _attachedObject.GetComponent<Rigidbody>();
+                    if (attachedRigidbody != null)
+                    {
+                        attachedRigidbody.isKinematic = true;
+                    }
+                }
             }
         }
     }
