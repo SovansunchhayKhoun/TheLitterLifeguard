@@ -25,6 +25,7 @@ public class VerletLine : MonoBehaviour
     private bool isChangingLength = false;
     public GameObject MarkerPrefab; // Drag a marker prefab (like a sphere) here in the inspector.
     private GameObject markerInstance;
+    private bool isReeling = false;
 
     // Represents a segment of the line.
     private class LineParticle
@@ -38,7 +39,7 @@ public class VerletLine : MonoBehaviour
     // Initializes the line.
     void Start()
     {
-        Delay = 1.5f;
+        InitVerletLine();
         particles = new List<LineParticle>();
         for (int i = 0; i < Segments; i++)
         {
@@ -57,17 +58,23 @@ public class VerletLine : MonoBehaviour
     void Update()
     {
         RaycastHit _rayCastHit = RayCast.hitInfo;
-        Debug.Log(_rayCastHit.point);
         GameObject _attachedObject = RayCast.attachedObject;
+
+        if (!isReeling)
+        {
+            EndPoint.position = _rayCastHit.point; // Update the endpoint position
+        }
+
         if (Input.GetMouseButtonDown(0)) // On left-click, cast
         {
-            // Start casting
-            StartCoroutine(IncreaseLengthAfterDelay(Delay));
+            EndPoint.position = _rayCastHit.point; // Update the endpoint position
+            isReeling = false;
         }
         else if (Input.GetKey(KeyCode.Q)) // On "Q", reel in
         {
             currentTargetLength = startSegmentLength;
             isChangingLength = true;
+            isReeling = true;
 
             if (_rayCastHit.point != new Vector3(0, 0, 0))
             {
@@ -94,35 +101,40 @@ public class VerletLine : MonoBehaviour
                 // If reeling in, attach the hit object to the endpoint
                 if (_attachedObject != null && SegmentLength == startSegmentLength)
                 {
-                    var originalLossyScale = _attachedObject.transform.lossyScale; // Store lossy scale
-
-                    _attachedObject.transform.SetParent(EndPoint);
-                    _attachedObject.transform.localPosition = Vector3.zero; // Reset local position
-                    _attachedObject.transform.localRotation = Quaternion.identity; // Reset local rotation
-
-                    // Calculate the local scale to maintain the original lossy scale
-                    _attachedObject.transform.localScale = new Vector3(
-                        originalLossyScale.x / EndPoint.lossyScale.x,
-                        originalLossyScale.y / EndPoint.lossyScale.y,
-                        originalLossyScale.z / EndPoint.lossyScale.z
-                    );
-
-                    // disable the attached object's Rigidbody to prevent physics interference
-                    Rigidbody attachedRigidbody = _attachedObject.GetComponent<Rigidbody>();
-                    if (attachedRigidbody != null)
-                    {
-                        attachedRigidbody.isKinematic = true;
-                    }
+                    AttachTrash(_attachedObject);
                 }
             }
         }
     }
 
-    private IEnumerator IncreaseLengthAfterDelay(float delay)
+    private void AttachTrash(GameObject attachedObject)
     {
-        yield return new WaitForSeconds(delay);
-        currentTargetLength = maxSegmentLength;
-        isChangingLength = true;
+        var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale
+
+        attachedObject.transform.SetParent(EndPoint);
+        attachedObject.transform.localPosition = Vector3.zero; // Reset local position
+        attachedObject.transform.localRotation = Quaternion.identity; // Reset local rotation
+
+        // Calculate the local scale to maintain the original lossy scale
+        attachedObject.transform.localScale = new Vector3(
+            originalLossyScale.x / EndPoint.lossyScale.x,
+            originalLossyScale.y / EndPoint.lossyScale.y,
+            originalLossyScale.z / EndPoint.lossyScale.z
+        );
+
+        // disable the attached object's Rigidbody to prevent physics interference
+        Rigidbody attachedRigidbody = attachedObject.GetComponent<Rigidbody>();
+        if (attachedRigidbody != null)
+        {
+            attachedRigidbody.isKinematic = true;
+        }
+    }
+
+    private void InitVerletLine()
+    {
+        Delay = 1.5f;
+        LerpSpeed = 1f;
+        tensionConstant = 1000f;
     }
 
     // Update the line with Verlet Physics.
