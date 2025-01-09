@@ -21,8 +21,10 @@ public class VerletLine : MonoBehaviour
     public float tensionConstant = 10f;
     public bool SecondHasRigidbody = false;
     public float LerpSpeed = 1f;
-    public float Delay = 3f;
+    public float Delay = 0.5f;
     private bool isChangingLength = false;
+    public GameObject MarkerPrefab; // Drag a marker prefab (like a sphere) here in the inspector.
+    private GameObject markerInstance;
 
     // Represents a segment of the line.
     private class LineParticle
@@ -43,27 +45,38 @@ public class VerletLine : MonoBehaviour
             particles.Add(new LineParticle { Pos = point, OldPos = point, Acceleration = Gravity });
         }
         lineRenderer.positionCount = particles.Count;
+
+        // Instantiate marker and deactivate it initially
+        if (MarkerPrefab)
+        {
+            markerInstance = Instantiate(MarkerPrefab);
+            markerInstance.SetActive(false);
+        }
     }
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // On left-click, cast
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f))
-            {
-                Debug.Log("Hook aimed at: " + hitInfo.point);
-
-                // Set EndPoint to the raycast hit location
-                EndPoint.position = hitInfo.point;
-
-                // Start casting
-                StartCoroutine(IncreaseLengthAfterDelay(Delay));
-            }
+            // Start casting
+            StartCoroutine(IncreaseLengthAfterDelay(Delay));
         }
         else if (Input.GetKeyDown(KeyCode.Q)) // On "Q", reel in
         {
             currentTargetLength = startSegmentLength;
             isChangingLength = true;
+
+            if (RayCast.hitInfo.point != new Vector3(0, 0, 0))
+            {
+                Debug.Log("Hook aimed at: " + RayCast.hitInfo.point);
+                EndPoint.position = RayCast.hitInfo.point; // Update the endpoint position
+
+                // Move and show the marker at the hit position
+                if (markerInstance)
+                {
+                    markerInstance.transform.position = RayCast.hitInfo.point;
+                    markerInstance.SetActive(true);
+                }
+            }
         }
 
         // Adjust line length smoothly

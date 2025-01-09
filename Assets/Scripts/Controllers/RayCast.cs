@@ -8,7 +8,7 @@ public class RayCast : MonoBehaviour
     [SerializeField] private FishingRodSfx fishingRodSfx;
     [SerializeField] LayerMask targetLayerMask;
     [SerializeField] private LineRenderer lineRenderer;
-    RaycastHit hitInfo;
+    public static RaycastHit hitInfo;
 
     private void Start()
     {
@@ -42,7 +42,7 @@ public class RayCast : MonoBehaviour
                 lineRenderer.endColor = Color.green;
 
                 fishingRodSfx.PlaySuccessFishCast();
-                StartCoroutine(WaitForNextScene(fishingRodSfx.GetSuccessFishCastClip().length));
+                // StartCoroutine(WaitForNextScene(fishingRodSfx.GetSuccessFishCastClip().length));
             }
             else
             {
