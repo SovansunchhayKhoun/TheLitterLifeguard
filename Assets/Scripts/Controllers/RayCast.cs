@@ -7,7 +7,8 @@ public class RayCast : MonoBehaviour
 {
     [SerializeField] private FishingRodSfx fishingRodSfx;
     [SerializeField] private LineRenderer lineRenderer;
-    public static RaycastHit hitInfo;
+    private RaycastHit hitInfo;
+    public static RaycastHit castHookHitInfo;
     public static GameObject attachedObject; // Object hit by the raycast
 
 
@@ -76,6 +77,7 @@ public class RayCast : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
         if (Physics.Raycast(ray, out hitInfo, 20f))
         {
+            castHookHitInfo = hitInfo;
             if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Target"))
             {
                 attachedObject = hitInfo.collider.gameObject;

@@ -10,18 +10,17 @@ public class VerletLine : MonoBehaviour
     public Transform EndPoint;
     public int Segments = 10;
     public LineRenderer lineRenderer;
-    public float SegmentLength = 0.03f;
-    public float startSegmentLength = 0.03f;
-    public float currentTargetLength = 0.03f;
-    public float maxSegmentLength = 0.4f;
-    public Vector3 Gravity = new Vector3(0, -9.81f, 0);
+    public float SegmentLength;
+    public float startSegmentLength;
+    public float currentTargetLength;
+    public float maxSegmentLength;
+    public Vector3 Gravity = new(0, -9.81f, 0);
     // Num of Physics iterations
     public int Iterations = 6;
     // higher is stiffer, lower is stretchier
-    public float tensionConstant = 10f;
+    public float tensionConstant;
     public bool SecondHasRigidbody = false;
-    public float LerpSpeed = 1f;
-    public float Delay = 0.5f;
+    public float LerpSpeed;
     private bool isChangingLength = false;
     public GameObject MarkerPrefab; // Drag a marker prefab (like a sphere) here in the inspector.
     private GameObject markerInstance;
@@ -34,37 +33,23 @@ public class VerletLine : MonoBehaviour
         public Vector3 OldPos;
         public Vector3 Acceleration;
     }
-
     private List<LineParticle> particles;
+
     // Initializes the line.
     void Start()
     {
         InitVerletLine();
-        particles = new List<LineParticle>();
-        for (int i = 0; i < Segments; i++)
-        {
-            Vector3 point = Vector3.Lerp(StartPoint.position, EndPoint.position, i / (float)(Segments - 1));
-            particles.Add(new LineParticle { Pos = point, OldPos = point, Acceleration = Gravity });
-        }
-        lineRenderer.positionCount = particles.Count;
-
-        // Instantiate marker and deactivate it initially
-        if (MarkerPrefab)
-        {
-            markerInstance = Instantiate(MarkerPrefab);
-            markerInstance.SetActive(false);
-        }
     }
+
     void Update()
     {
-        RaycastHit _rayCastHit = RayCast.hitInfo;
+        RaycastHit _rayCastHit = RayCast.castHookHitInfo;
         GameObject _attachedObject = RayCast.attachedObject;
 
         if (!isReeling)
         {
             EndPoint.position = _rayCastHit.point; // Update the endpoint position
         }
-
         if (Input.GetMouseButtonDown(0)) // On left-click, cast
         {
             EndPoint.position = _rayCastHit.point; // Update the endpoint position
@@ -72,41 +57,50 @@ public class VerletLine : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Q)) // On "Q", reel in
         {
-            currentTargetLength = startSegmentLength;
-            isChangingLength = true;
-            isReeling = true;
-
-            if (_rayCastHit.point != new Vector3(0, 0, 0))
-            {
-                EndPoint.position = _rayCastHit.point; // Update the endpoint position
-                // Move and show the marker at the hit position
-                if (markerInstance)
-                {
-                    markerInstance.transform.position = _rayCastHit.point;
-                    markerInstance.SetActive(true);
-                }
-            }
+            StartReeling(raycastHit: _rayCastHit);
         }
 
         // Adjust line length smoothly
         if (isChangingLength)
         {
-            SegmentLength = Mathf.Lerp(SegmentLength, currentTargetLength, LerpSpeed * Time.deltaTime);
+            AdjustLineLength(_attachedObject);
+        }
+    }
 
-            if (Mathf.Abs(SegmentLength - currentTargetLength) < 0.01f)
+    private void StartReeling(RaycastHit raycastHit)
+    {
+        currentTargetLength = startSegmentLength;
+        isChangingLength = true;
+        isReeling = true;
+
+        if (raycastHit.point != new Vector3(0, 0, 0))
+        {
+            EndPoint.position = raycastHit.point; // Update the endpoint position
+                                                  // Move and show the marker at the hit position
+            if (markerInstance)
             {
-                SegmentLength = currentTargetLength;
-                isChangingLength = false;
-
-                // If reeling in, attach the hit object to the endpoint
-                if (_attachedObject != null && SegmentLength == startSegmentLength)
-                {
-                    AttachTrash(_attachedObject);
-                }
+                markerInstance.transform.position = raycastHit.point;
+                markerInstance.SetActive(true);
             }
         }
     }
 
+    private void AdjustLineLength(GameObject attachedObject)
+    {
+        SegmentLength = Mathf.Lerp(SegmentLength, currentTargetLength, LerpSpeed * Time.deltaTime);
+
+        if (Mathf.Abs(SegmentLength - currentTargetLength) < 0.01f)
+        {
+            SegmentLength = currentTargetLength;
+            isChangingLength = false;
+
+            // If reeling in, attach the hit object to the endpoint
+            if (attachedObject != null && SegmentLength == startSegmentLength)
+            {
+                AttachTrash(attachedObject);
+            }
+        }
+    }
     private void AttachTrash(GameObject attachedObject)
     {
         var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale
@@ -132,9 +126,28 @@ public class VerletLine : MonoBehaviour
 
     private void InitVerletLine()
     {
-        Delay = 1.5f;
         LerpSpeed = 1f;
         tensionConstant = 1000f;
+
+        SegmentLength = 0.03f;
+        startSegmentLength = 0.03f;
+        currentTargetLength = 0.03f;
+        maxSegmentLength = 0.4f;
+
+        particles = new List<LineParticle>();
+        for (int i = 0; i < Segments; i++)
+        {
+            Vector3 point = Vector3.Lerp(StartPoint.position, EndPoint.position, i / (float)(Segments - 1));
+            particles.Add(new LineParticle { Pos = point, OldPos = point, Acceleration = Gravity });
+        }
+        lineRenderer.positionCount = particles.Count;
+
+        // Instantiate marker and deactivate it initially
+        if (MarkerPrefab)
+        {
+            markerInstance = Instantiate(MarkerPrefab);
+            markerInstance.SetActive(false);
+        }
     }
 
     // Update the line with Verlet Physics.
