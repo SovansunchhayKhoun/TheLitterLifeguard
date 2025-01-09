@@ -46,16 +46,17 @@ public class VerletLine : MonoBehaviour
         RaycastHit _rayCastHit = RayCast.castHookHitInfo;
         GameObject _attachedObject = RayCast.attachedObject;
 
-        if (!isReeling)
+        if (!isReeling && _rayCastHit.point != new Vector3(0, 0, 0))
         {
             EndPoint.position = _rayCastHit.point; // Update the endpoint position
         }
+
         if (Input.GetMouseButtonDown(0)) // On left-click, cast
         {
             EndPoint.position = _rayCastHit.point; // Update the endpoint position
             isReeling = false;
         }
-        else if (Input.GetKey(KeyCode.Q)) // On "Q", reel in
+        else if (Input.GetKey(KeyCode.Q) && !isReeling) // On "Q", reel in
         {
             StartReeling(raycastHit: _rayCastHit);
         }
@@ -95,7 +96,7 @@ public class VerletLine : MonoBehaviour
             isChangingLength = false;
 
             // If reeling in, attach the hit object to the endpoint
-            if (attachedObject != null && SegmentLength == startSegmentLength)
+            if (isReeling && attachedObject != null && SegmentLength == startSegmentLength)
             {
                 AttachTrash(attachedObject);
             }
@@ -133,6 +134,8 @@ public class VerletLine : MonoBehaviour
         startSegmentLength = 0.03f;
         currentTargetLength = 0.03f;
         maxSegmentLength = 0.4f;
+        isReeling = false;
+        isChangingLength = false;
 
         particles = new List<LineParticle>();
         for (int i = 0; i < Segments; i++)

@@ -10,7 +10,7 @@ public class RayCast : MonoBehaviour
     private RaycastHit hitInfo;
     public static RaycastHit castHookHitInfo;
     public static GameObject attachedObject; // Object hit by the raycast
-
+    private readonly float maxDistance = 10f;
 
     private void Start()
     {
@@ -55,7 +55,7 @@ public class RayCast : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
         // if (Physics.Raycast(ray, out hitInfo, 20f, targetLayerMask))
-        if (Physics.Raycast(ray, out hitInfo, 20f))
+        if (Physics.Raycast(ray, out hitInfo, maxDistance))
         {
             if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Target"))
             {
@@ -66,7 +66,7 @@ public class RayCast : MonoBehaviour
             }
             else
             {
-                lineRenderer.SetPosition(1, transform.position + transform.TransformDirection(Vector3.forward) * 20f);
+                lineRenderer.SetPosition(1, transform.position + transform.TransformDirection(Vector3.forward) * maxDistance);
                 lineRenderer.startColor = Color.black;
                 lineRenderer.endColor = Color.black;
             }
@@ -75,7 +75,7 @@ public class RayCast : MonoBehaviour
     private void Cast()
     {
         Ray ray = new Ray(transform.position, transform.TransformDirection(Vector3.forward));
-        if (Physics.Raycast(ray, out hitInfo, 20f))
+        if (Physics.Raycast(ray, out hitInfo, maxDistance))
         {
             castHookHitInfo = hitInfo;
             if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Target"))
