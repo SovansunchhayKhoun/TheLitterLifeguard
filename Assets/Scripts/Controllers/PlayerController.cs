@@ -26,10 +26,12 @@ public class PlayerController : MonoBehaviour
     [Header("Camera Settings")]
     // Add the Camera and aiming logic
     public Transform playerCamera;
-    public CinemachineFreeLook thirdPersonCamera;
+    public Transform thirdPersonCamera;
     public float pitchRange = 80f; // Limits for camera pitch (up/down rotation)
     public float cameraLookSpeed = 10f;
     private float xRotation;
+    public float turnSmoothTime = 0.1f;
+    private float turnSmoothVelocity;
 
     private Animator animator;
 
@@ -52,11 +54,6 @@ public class PlayerController : MonoBehaviour
         jumpForce = 5f;
         fppMouseSensitivity = 150f;
 
-        if (thirdPersonCamera != null)
-        {
-            thirdPersonCamera.m_XAxis.m_MaxSpeed = cameraLookSpeed;
-            thirdPersonCamera.m_YAxis.m_MaxSpeed = cameraLookSpeed;
-        }
     }
 
     void Update()
@@ -112,28 +109,24 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTPPMovement()
     {
-        float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right arrow keys
-        float moveZ = Input.GetAxis("Vertical"); // W/S or Up/Down arrow keys
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 movement = new(moveX, 0, moveZ);
-        float magnitude = Mathf.Clamp01(movement.magnitude) * moveSpeed;
-        movement.Normalize();
-
+        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
+        float magnitude = Mathf.Clamp01(direction.magnitude) * moveSpeed;
         float speed = magnitude / moveSpeed; // Normalize the speed for the animator
+
+        // Calculate angle the player to look at
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + thirdPersonCamera.transform.eulerAngles.y;
+
+        // Smooth the angle
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        transform.rotation = Quaternion.Euler(0, angle, 0);
         animator.SetFloat("Speed", speed);
 
-        Vector3 velocity = movement * magnitude;
-        transform.Translate(velocity * Time.deltaTime, Space.World);
-
-        if (movement != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                toRotation,
-                rotationSpeed * Time.deltaTime
-            );
-        }
+        Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+        transform.Translate(moveDirection.normalized * direction.magnitude * moveSpeed * Time.deltaTime, Space.World);
     }
 
     private void HandleJump()
@@ -155,35 +148,24 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMouseLook()
     {
-        // Rotate the camera (pitch) based on mouse Y input (up and down)
         if (CameraSwitch.isFirstPerson)
         {
-            float mouseX = Input.GetAxis("Mouse X") * fppMouseSensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * fppMouseSensitivity * Time.deltaTime;
-
-            // Rotate camera up/down (pitch)
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -pitchRange, pitchRange); // Clamping the pitch to avoid extreme angles
-
-            playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Apply the pitch
-
-            // Rotate the player (Yaw) based on mouse X input (left and right)
-            transform.Rotate(Vector3.up * mouseX); // Yaw
+            HandleFPPMouseLook();
         }
-        else
-        {
-            float mouseX = Input.GetAxis("Mouse X") * tppMouseSensitivity;
-            float mouseY = Input.GetAxis("Mouse Y") * tppMouseSensitivity;
+    }
 
-            transform.Rotate(Vector3.up * mouseX); // Rotate player for yaw
+    private void HandleFPPMouseLook()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * fppMouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * fppMouseSensitivity * Time.deltaTime;
 
-            // Control horizontal (yaw) rotation:
-            thirdPersonCamera.m_XAxis.Value += mouseX * Time.deltaTime;
+        // Rotate camera up/down (pitch)
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -pitchRange, pitchRange); // Clamping the pitch to avoid extreme angles
 
-            // Control vertical (pitch) rotation:
-            thirdPersonCamera.m_YAxis.Value -= mouseY * Time.deltaTime;
+        playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f); // Apply the pitch
 
-            thirdPersonCamera.m_YAxis.Value = Mathf.Clamp(thirdPersonCamera.m_YAxis.Value, 0.3f, 0.8f);
-        }
+        // Rotate the player (Yaw) based on mouse X input (left and right)
+        transform.Rotate(Vector3.up * mouseX); // Yaw
     }
 }
