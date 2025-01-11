@@ -46,7 +46,7 @@ public class VerletLine : MonoBehaviour
         RaycastHit _rayCastHit = RayCast.castHookHitInfo;
         GameObject _attachedObject = RayCast.attachedObject;
 
-        if (!isReeling && _rayCastHit.point != new Vector3(0, 0, 0))
+        if (!isReeling && _rayCastHit.point != Vector3.zero)
         {
             EndPoint.position = _rayCastHit.point; // Update the endpoint position
         }
@@ -74,7 +74,7 @@ public class VerletLine : MonoBehaviour
         isChangingLength = true;
         isReeling = true;
 
-        if (raycastHit.point != new Vector3(0, 0, 0))
+        if (raycastHit.point != Vector3.zero)
         {
             EndPoint.position = raycastHit.point; // Update the endpoint position
                                                   // Move and show the marker at the hit position
