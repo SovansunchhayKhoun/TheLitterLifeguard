@@ -4572,7 +4572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3114906672328217838, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: m_Constraints
-      value: 112
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3114906672328217838, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: m_Interpolate
@@ -4651,6 +4651,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7563706590228049746, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 965268673}
+    - target: {fileID: 7563706590228049746, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: tppCamera
       value: 
       objectReference: {fileID: 0}
@@ -4670,6 +4674,10 @@ PrefabInstance:
       propertyPath: thirdPersonCamera
       value: 
       objectReference: {fileID: 189896743}
+    - target: {fileID: 7563706590228049746, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
+      propertyPath: cameraFollowTarget
+      value: 
+      objectReference: {fileID: 965268675}
     - target: {fileID: 7563706590228049746, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 8
@@ -4694,6 +4702,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7538707872733487929, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 965268679}
+    - targetCorrespondingSourceObject: {fileID: 7538707872733487929, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 965268684}
   m_SourcePrefab: {fileID: 100100000, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
 --- !u!1 &965268670 stripped
 GameObject:
@@ -4728,6 +4739,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2250599569875910321, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
   m_PrefabInstance: {fileID: 965268669}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &965268673 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3114906672328217838, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
+  m_PrefabInstance: {fileID: 965268669}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &965268675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7193671865956055427, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
@@ -4748,6 +4764,28 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   successFishCastClip: {fileID: 0}
   missFishCastClip: {fileID: 0}
+--- !u!114 &965268684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965268670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181c89b1f08aef448a8c915c10f5a974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filteredForwardInput: 0
+  filteredTurnInput: 0
+  InputMapToCircular: 1
+  forwardInputFilter: 5
+  turnInputFilter: 5
+  forwardSpeedLimit: 1
+  <Forward>k__BackingField: 0
+  <Turn>k__BackingField: 0
+  <Action>k__BackingField: 0
+  <Jump>k__BackingField: 0
 --- !u!1001 &968407490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8489,7 +8527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5549c8113284743228a28f116f96e57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirdPersonCamera: {fileID: 189896743}
+  thirdPersonCamera: {fileID: 0}
   firstPersonCamera: {fileID: 22809696}
   fishingRod: {fileID: 1129908995437483916}
 --- !u!1001 &1902595867

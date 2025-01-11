@@ -5,29 +5,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player")]
     public Rigidbody player;
     public float moveSpeed = 10f;
     public float rotationSpeed = 720f;
     public float jumpForce = 5f;
-    private Animator animator;
+
 
     [Header("Ground Check Settings")]
     public Transform groundCheck; // Empty object at the player's feet
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer; // Layer mask to identify ground
-
     private bool isGrounded;
-    private float xRotation;
+
+
+    [Header("Mouse Settings")]
     public float fppMouseSensitivity = 100f;
     public float tppMouseSensitivity = 1f;
 
+    [Header("Camera Settings")]
     // Add the Camera and aiming logic
     public Transform playerCamera;
-    public float pitchRange = 80f; // Limits for camera pitch (up/down rotation)
-
-    [Header("Cinemachine Camera Settings")]
     public CinemachineFreeLook thirdPersonCamera;
+    public float pitchRange = 80f; // Limits for camera pitch (up/down rotation)
     public float cameraLookSpeed = 10f;
+    private float xRotation;
+
+    private Animator animator;
 
     void Start()
     {
