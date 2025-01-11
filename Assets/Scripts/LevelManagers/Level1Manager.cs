@@ -2,10 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-class Level1Manager : MonoBehaviour
+class Level1Manager : LevelManager
 {
   public Text timer;
-  public static float time = 30f;
+  public static float time;
   public void Start()
   {
     UpdateTimerDisplay();
@@ -35,8 +35,8 @@ class Level1Manager : MonoBehaviour
     {
       // Game Over when timer hits 0
       Debug.Log("Game over");
+      ToggleGameOver();
     }
-
   }
 
   private void UpdateTimerDisplay()
