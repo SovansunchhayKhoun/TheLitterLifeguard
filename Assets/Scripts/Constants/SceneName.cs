@@ -1,6 +1,8 @@
 class SceneNameEnum
 {
-  public const string SORTING_SCENE = "SortingScene";
+  public const string LEVEL1_SORTING_SCENE = "Level1SortingScene";
+  public const string LEVEL2_SORTING_SCENE = "Level2SortingScene";
+  public const string LEVEL3_SORTING_SCENE = "Level3SortingScene";
   public const string START_SCENE = "StartScene";
   public const string APPEARANCE_SCENE = "AppearanceScene";
   public const string LEVEL_SCENE = "LevelScene";

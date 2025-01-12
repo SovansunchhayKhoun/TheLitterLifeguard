@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-class Level1Manager : LevelManager
+class Level1Manager : GameplayManager
 {
   protected override void Start()
   {

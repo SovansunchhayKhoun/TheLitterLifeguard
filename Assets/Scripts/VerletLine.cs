@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -122,6 +122,21 @@ public class VerletLine : MonoBehaviour
         if (attachedRigidbody != null)
         {
             attachedRigidbody.isKinematic = true;
+
+            switch (LevelManager.selectedLevel)
+            {
+                case 1:
+                    SceneNavigator.ToLevel1SortingScene();
+                    break;
+                case 2:
+                    SceneNavigator.ToLevel2SortingScene();
+                    break;
+                case 3:
+                    SceneNavigator.ToLevel3SortingScene();
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 

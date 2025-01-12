@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class UIManager : LevelManager
+public class UIManager : GameplayManager
 {
     [SerializeField] TMP_Text pointCounter;
     public static int points = 0;
-    [SerializeField] TMP_Text timer;
-    // private float timeRemaining = 60f;
+    // [SerializeField] TMP_Text timer;
     private bool timerIsRunning = false;
     [SerializeField] GameObject[] tooltips;
     [SerializeField] TrashInteract trashManager;
@@ -53,7 +52,7 @@ public class UIManager : LevelManager
             if (time > 0)
             {
                 time -= Time.deltaTime;
-                DisplayTime(time);
+                // DisplayTime(time);
             }
             else
             {
@@ -92,13 +91,13 @@ public class UIManager : LevelManager
         SceneManager.LoadScene(0);
     }
 
-    private void DisplayTime(float timeToDisplay)
-    {
-        timeToDisplay++;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
+    // private void DisplayTime(float timeToDisplay)
+    // {
+    //     timeToDisplay++;
+    //     float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+    //     float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+    //     timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    // }
 
     public void UIRemoveTooltip(int type)
     {

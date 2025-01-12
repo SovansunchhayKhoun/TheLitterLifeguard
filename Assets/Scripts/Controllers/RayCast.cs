@@ -49,7 +49,7 @@ public class RayCast : MonoBehaviour
     private IEnumerator WaitForNextScene(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneNavigator.ToSortingScene();
+        SceneNavigator.ToLevel1SortingScene();
     }
     private void Aim()
     {

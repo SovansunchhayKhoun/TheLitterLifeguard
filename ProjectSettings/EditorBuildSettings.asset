@@ -18,12 +18,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level1Scene.unity
     guid: 74a22c97536811f448eb15f9ede8bbd8
   - enabled: 1
+    path: Assets/Scenes/TrashSorting/Level1SortingScene.unity
+    guid: b879903883211c44cb7fc35860dd2328
+  - enabled: 1
     path: Assets/Scenes/Levels/Level2Scene.unity
     guid: 0099f4204396c9e4499341b0e73330e4
+  - enabled: 1
+    path: Assets/Scenes/TrashSorting/Level2SortingScene.unity
+    guid: 2a763f9b1010b4e21a700f4409caad09
   - enabled: 1
     path: Assets/Scenes/Levels/Level3Scene.unity
     guid: c43dd133267cd7c4faabee493dbd9dcb
   - enabled: 1
-    path: Assets/Scenes/TrashSorting/Level1SortingScene.unity
-    guid: b879903883211c44cb7fc35860dd2328
+    path: Assets/Scenes/TrashSorting/Level3SortingScene.unity
+    guid: 829bcd863a1124e789d54d6ef0695179
   m_configObjects: {}

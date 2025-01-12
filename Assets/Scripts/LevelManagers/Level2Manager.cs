@@ -1,4 +1,4 @@
-public class Level2Manager : LevelManager
+public class Level2Manager : GameplayManager
 {
   protected override void Start()
   {
