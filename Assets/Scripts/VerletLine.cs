@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 
@@ -102,7 +103,7 @@ public class VerletLine : MonoBehaviour
             }
         }
     }
-    private void AttachTrash(GameObject attachedObject)
+    private async void AttachTrash(GameObject attachedObject)
     {
         var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale
 
@@ -123,6 +124,8 @@ public class VerletLine : MonoBehaviour
         {
             attachedRigidbody.isKinematic = true;
 
+            // Allow time fow line to render
+            await Task.Delay(1500);
             switch (LevelManager.selectedLevel)
             {
                 case 1:
