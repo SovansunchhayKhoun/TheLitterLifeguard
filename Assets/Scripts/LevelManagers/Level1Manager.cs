@@ -20,7 +20,7 @@ class Level1Manager : LevelManager
 
   private void InitGame()
   {
-    time = 3f;
+    time = 120f;
     UpdateTimerDisplay();
   }
 
