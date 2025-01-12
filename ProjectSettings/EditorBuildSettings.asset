@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level3Scene.unity
     guid: c43dd133267cd7c4faabee493dbd9dcb
   - enabled: 1
-    path: Assets/Scenes/TrashSorting/SortingScene.unity
+    path: Assets/Scenes/TrashSorting/Level1SortingScene.unity
     guid: b879903883211c44cb7fc35860dd2328
   m_configObjects: {}
