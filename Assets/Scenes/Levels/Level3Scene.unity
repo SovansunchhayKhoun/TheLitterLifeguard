@@ -588,19 +588,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1912614732}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1357b3ab561a94e93a93d5e522504153, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -80.70229
+      value: -16.632294
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1357b3ab561a94e93a93d5e522504153, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.18
+      value: -0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1357b3ab561a94e93a93d5e522504153, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.239998
+      value: 13.489998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1357b3ab561a94e93a93d5e522504153, type: 3}
       propertyPath: m_LocalRotation.w
@@ -693,6 +693,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.07
   frequency: 1
+--- !u!4 &102227958 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1357b3ab561a94e93a93d5e522504153, type: 3}
+  m_PrefabInstance: {fileID: 102227954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &106796307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -779,9 +784,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 500751903}
     m_Modifications:
+    - target: {fileID: 1761234580564213737, guid: b991a99ddd15f484282918f293debed3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
       propertyPath: m_Name
       value: Soda Can Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
       propertyPath: m_TagString
@@ -967,7 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da398962bac9f3740a735b4eec694945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingRodSfx: {fileID: 0}
+  fishingRodSfx: {fileID: 1863828447}
   lineRenderer: {fileID: 0}
 --- !u!1 &269014744
 GameObject:
@@ -1117,6 +1130,10 @@ PrefabInstance:
       value: Chicken Bone
       objectReference: {fileID: 0}
     - target: {fileID: 1153803601918318987, guid: cb28e6a8083d9404db07c7774f4627ba, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153803601918318987, guid: cb28e6a8083d9404db07c7774f4627ba, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -1165,6 +1182,10 @@ PrefabInstance:
       value: Beer Bottle Green with Label
       objectReference: {fileID: 0}
     - target: {fileID: 631681890585385247, guid: 20752bbf2f5d71944bcff39c7a6e686f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 631681890585385247, guid: 20752bbf2f5d71944bcff39c7a6e686f, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -1207,6 +1228,10 @@ PrefabInstance:
     - target: {fileID: 1650006661591258338, guid: 20752bbf2f5d71944bcff39c7a6e686f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6338368095915491944, guid: 20752bbf2f5d71944bcff39c7a6e686f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1653,15 +1678,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7193671865956055427, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -65.4
+      value: -90.81
       objectReference: {fileID: 0}
     - target: {fileID: 7193671865956055427, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.19
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 7193671865956055427, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.36
+      value: 23.78
       objectReference: {fileID: 0}
     - target: {fileID: 7193671865956055427, guid: 374b79a851dbbe14189f92af5a92669b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1836,6 +1861,10 @@ PrefabInstance:
       value: Apple Core Red
       objectReference: {fileID: 0}
     - target: {fileID: 124406358728296116, guid: 89aee7577d87360428a678ee7c536650, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 124406358728296116, guid: 89aee7577d87360428a678ee7c536650, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -1922,6 +1951,10 @@ PrefabInstance:
     - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
       propertyPath: m_Name
       value: Mug White Broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
       propertyPath: m_TagString
@@ -2438,7 +2471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402138743}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17987594, y: -0.4501345, z: 0.093100555, w: 0.86968726}
+  m_LocalRotation: {x: 0.13155212, y: -0.74459654, z: 0.15400371, w: 0.63604474}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2870,6 +2903,7 @@ Transform:
   - {fileID: 710238987}
   - {fileID: 2103322819}
   - {fileID: 1393749302}
+  - {fileID: 1598606063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &521480952
@@ -2963,6 +2997,10 @@ PrefabInstance:
       value: Beer Can Blue Crushed
       objectReference: {fileID: 0}
     - target: {fileID: 937326242163579350, guid: 1a55f6ba8b72d7b4e90f993836efaad7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 937326242163579350, guid: 1a55f6ba8b72d7b4e90f993836efaad7, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -3017,6 +3055,10 @@ PrefabInstance:
     - target: {fileID: 1017149123105775675, guid: 1a55f6ba8b72d7b4e90f993836efaad7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4581694020254849032, guid: 1a55f6ba8b72d7b4e90f993836efaad7, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3158,7 +3200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551221511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1493738, y: -0.45311305, z: 0.07731319, w: 0.875442}
+  m_LocalRotation: {x: 0.1092444, y: -0.74952364, z: 0.12788881, w: 0.6402535}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3452,7 +3494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01f375bf0f8d4bc4084f0a2663970961, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0348272
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01f375bf0f8d4bc4084f0a2663970961, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4469,6 +4511,10 @@ PrefabInstance:
       value: Broken Pottery 2
       objectReference: {fileID: 0}
     - target: {fileID: 2033160906336582249, guid: 8a25dbd1ff8ccdd40a98fdf41f996224, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033160906336582249, guid: 8a25dbd1ff8ccdd40a98fdf41f996224, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -4866,9 +4912,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 820386908}
     m_Modifications:
+    - target: {fileID: 1761234580564213737, guid: b991a99ddd15f484282918f293debed3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
       propertyPath: m_Name
       value: Soda Can Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
       propertyPath: m_TagString
@@ -5092,6 +5146,10 @@ PrefabInstance:
     - target: {fileID: 8322863303335674192, guid: 7899e43a811a2fe43ad1dea14f502569, type: 3}
       propertyPath: m_Name
       value: Wine Bottle Red Broke 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322863303335674192, guid: 7899e43a811a2fe43ad1dea14f502569, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8322863303335674192, guid: 7899e43a811a2fe43ad1dea14f502569, type: 3}
       propertyPath: m_TagString
@@ -6938,6 +6996,10 @@ PrefabInstance:
       value: Beer Bottle Blue with Label
       objectReference: {fileID: 0}
     - target: {fileID: 3406732096623023888, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406732096623023888, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -6980,6 +7042,10 @@ PrefabInstance:
     - target: {fileID: 3559264064031709933, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -3.572
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103492697189698663, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7281,6 +7347,10 @@ PrefabInstance:
     - target: {fileID: 5438048726324099442, guid: 28b58cc1843a34c4184023567cecfaf9, type: 3}
       propertyPath: m_Name
       value: Fish Bone
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438048726324099442, guid: 28b58cc1843a34c4184023567cecfaf9, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5438048726324099442, guid: 28b58cc1843a34c4184023567cecfaf9, type: 3}
       propertyPath: m_TagString
@@ -7693,6 +7763,10 @@ PrefabInstance:
     - target: {fileID: -2714458269480576230, guid: e39ff66429756d445bea3a4f8e4a5284, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 289209636041008205, guid: e39ff66429756d445bea3a4f8e4a5284, type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 289209636041008205, guid: e39ff66429756d445bea3a4f8e4a5284, type: 3}
       propertyPath: m_Enabled
@@ -8264,6 +8338,10 @@ PrefabInstance:
       value: Wine Bottle Red Broke 2
       objectReference: {fileID: 0}
     - target: {fileID: 8322863303335674192, guid: 7899e43a811a2fe43ad1dea14f502569, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322863303335674192, guid: 7899e43a811a2fe43ad1dea14f502569, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -8385,9 +8463,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1912614732}
     m_Modifications:
+    - target: {fileID: 1761234580564213737, guid: b991a99ddd15f484282918f293debed3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
       propertyPath: m_Name
       value: Soda Can Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3230034147011233538, guid: b991a99ddd15f484282918f293debed3, type: 3}
       propertyPath: m_TagString
@@ -8485,6 +8571,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 395899605}
     m_Modifications:
+    - target: {fileID: 3139422608221117396, guid: 0961dcab35ddc0046a15f00792ab129a, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5273004953213419058, guid: 0961dcab35ddc0046a15f00792ab129a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9272,6 +9362,10 @@ PrefabInstance:
       value: Mug White Broken
       objectReference: {fileID: 0}
     - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -10009,6 +10103,10 @@ PrefabInstance:
       value: Chicken Bone
       objectReference: {fileID: 0}
     - target: {fileID: 1153803601918318987, guid: cb28e6a8083d9404db07c7774f4627ba, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153803601918318987, guid: cb28e6a8083d9404db07c7774f4627ba, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -10489,6 +10587,10 @@ PrefabInstance:
       value: Apple Core Red
       objectReference: {fileID: 0}
     - target: {fileID: 124406358728296116, guid: 89aee7577d87360428a678ee7c536650, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 124406358728296116, guid: 89aee7577d87360428a678ee7c536650, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -10655,6 +10757,10 @@ PrefabInstance:
       value: Apple Core Red
       objectReference: {fileID: 0}
     - target: {fileID: 124406358728296116, guid: 89aee7577d87360428a678ee7c536650, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 124406358728296116, guid: 89aee7577d87360428a678ee7c536650, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -10741,6 +10847,10 @@ PrefabInstance:
     - target: {fileID: 1171627040053429581, guid: 6288313a6a65fad4bbb68687be0c0c57, type: 3}
       propertyPath: m_Name
       value: Fish Bone 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1171627040053429581, guid: 6288313a6a65fad4bbb68687be0c0c57, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1171627040053429581, guid: 6288313a6a65fad4bbb68687be0c0c57, type: 3}
       propertyPath: m_TagString
@@ -12112,7 +12222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540546148}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11898694, y: -0.45551726, z: 0.0615855, w: 0.88008714}
+  m_LocalRotation: {x: 0.087021, y: -0.7535006, z: 0.10187261, w: 0.6436507}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12372,7 +12482,7 @@ Transform:
   m_GameObject: {fileID: 1583482264}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.7500775, y: 1.45561, z: -1.9449633}
+  m_LocalPosition: {x: 3.3269644, y: 1.4556102, z: 0.52641386}
   m_LocalScale: {x: 0.40099448, y: 0.40099448, z: 0.40099448}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12656,19 +12766,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 500751903}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b5880ebc5d85e4e45bf61cec4abe7d78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -62.010002
+      value: 3.7399979
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5880ebc5d85e4e45bf61cec4abe7d78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.06
+      value: -0.76
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5880ebc5d85e4e45bf61cec4abe7d78, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.879997
+      value: 6.9699974
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5880ebc5d85e4e45bf61cec4abe7d78, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12761,6 +12871,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.07
   frequency: 1
+--- !u!4 &1598606063 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b5880ebc5d85e4e45bf61cec4abe7d78, type: 3}
+  m_PrefabInstance: {fileID: 1598606059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1600751159
 GameObject:
   m_ObjectHideFlags: 0
@@ -12858,7 +12973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 617fab5281fb5b542b8893a15e208bec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.02
+      value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 617fab5281fb5b542b8893a15e208bec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13858,6 +13973,10 @@ PrefabInstance:
       value: Beer Bottle Blue with Label
       objectReference: {fileID: 0}
     - target: {fileID: 3406732096623023888, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406732096623023888, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -13900,6 +14019,10 @@ PrefabInstance:
     - target: {fileID: 3559264064031709933, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103492697189698663, guid: adffeaf7a5f1f6a49b3d7d275ca84f2e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14019,8 +14142,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717465823}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14937378, y: -0.45311305, z: 0.07731319, w: 0.875442}
-  m_LocalPosition: {x: -58.54186, y: 6.82, z: 25.509651}
+  m_LocalRotation: {x: 0.109244384, y: -0.74952364, z: 0.1278888, w: 0.6402535}
+  m_LocalPosition: {x: -82.513214, y: 7.05, z: 25.092772}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14306,6 +14429,10 @@ PrefabInstance:
     - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
       propertyPath: m_Name
       value: Mug White Broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1782649407311841039, guid: 6e76fda8b4b9c214e815d61ddf722aa8, type: 3}
       propertyPath: m_TagString
@@ -15042,6 +15169,10 @@ PrefabInstance:
       value: Broken Pottery 2
       objectReference: {fileID: 0}
     - target: {fileID: 2033160906336582249, guid: 8a25dbd1ff8ccdd40a98fdf41f996224, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033160906336582249, guid: 8a25dbd1ff8ccdd40a98fdf41f996224, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -15228,6 +15359,7 @@ Transform:
   - {fileID: 1714635770}
   - {fileID: 1979758634}
   - {fileID: 1763810035}
+  - {fileID: 102227958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1912927006
@@ -15627,6 +15759,10 @@ PrefabInstance:
       value: Soda Can Green Crushed
       objectReference: {fileID: 0}
     - target: {fileID: 3230034147011233538, guid: 57bc59eb149f5e5459dea44ded379c87, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230034147011233538, guid: 57bc59eb149f5e5459dea44ded379c87, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -15669,6 +15805,10 @@ PrefabInstance:
     - target: {fileID: 4536291819999006714, guid: 57bc59eb149f5e5459dea44ded379c87, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351139419438461794, guid: 57bc59eb149f5e5459dea44ded379c87, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15922,6 +16062,10 @@ PrefabInstance:
     - target: {fileID: 1153803601918318987, guid: cb28e6a8083d9404db07c7774f4627ba, type: 3}
       propertyPath: m_Name
       value: Chicken Bone
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153803601918318987, guid: cb28e6a8083d9404db07c7774f4627ba, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1153803601918318987, guid: cb28e6a8083d9404db07c7774f4627ba, type: 3}
       propertyPath: m_TagString
@@ -16681,6 +16825,10 @@ PrefabInstance:
       value: Mug Wood
       objectReference: {fileID: 0}
     - target: {fileID: 3093585832671737841, guid: 0c151e8b229a7e34ab8f87c12c618a32, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093585832671737841, guid: 0c151e8b229a7e34ab8f87c12c618a32, type: 3}
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
@@ -16767,6 +16915,10 @@ PrefabInstance:
     - target: {fileID: -2714458269480576230, guid: e39ff66429756d445bea3a4f8e4a5284, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 289209636041008205, guid: e39ff66429756d445bea3a4f8e4a5284, type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 289209636041008205, guid: e39ff66429756d445bea3a4f8e4a5284, type: 3}
       propertyPath: m_Enabled
@@ -16997,8 +17149,6 @@ SceneRoots:
   - {fileID: 1650161809}
   - {fileID: 2080960233}
   - {fileID: 1863828449}
-  - {fileID: 102227954}
-  - {fileID: 1598606059}
   - {fileID: 1565798115}
   - {fileID: 786245126}
   - {fileID: 500751903}
