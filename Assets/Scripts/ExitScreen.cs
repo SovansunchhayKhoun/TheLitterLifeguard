@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitScreen : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class ExitScreen : MonoBehaviour
     }
     public void Exit()
     {
-        Debug.Log("Exit Game");
+        
+        SceneManager.LoadScene(SceneNameEnum.LEVEL_SCENE);
         // Time.timeScale = 1;
         // Application.Quit();
     }

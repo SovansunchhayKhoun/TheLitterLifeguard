@@ -4413,10 +4413,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d0f3215f47d4b1c86baa9aa8598507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 2011650235}
   ScoreText: {fileID: 1417752114}
   ResultText: {fileID: 1860508258}
   gameOverPanel: {fileID: 1633378464}
+  timer: {fileID: 2011650235}
 --- !u!4 &923702118
 Transform:
   m_ObjectHideFlags: 0
