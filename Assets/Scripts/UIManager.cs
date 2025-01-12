@@ -5,37 +5,36 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+
+public class UIManager : LevelManager
 {
     [SerializeField] TMP_Text pointCounter;
-    public int points = 0;
+    public static int points = 0;
     [SerializeField] TMP_Text timer;
     // private float timeRemaining = 60f;
     private bool timerIsRunning = false;
     [SerializeField] GameObject[] tooltips;
     [SerializeField] TrashInteract trashManager;
-    public GameObject gameOverPanel;
-    public UIManager uiManager; // Reference to the UIManager script
-    public TextMeshProUGUI titleText; // Reference to the UI Text component
-    public TextMeshProUGUI scoreText; // Reference to the UI Text component
     public bool canClick = false;
     public float uiDisableTime = 0.25f;
 
     [SerializeField] bool isMenu = false;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (isMenu)
             return;
 
         DisplayTooltip(4, true, 0f);
-        uiManager.gameOverPanel.SetActive(false); // Hide the Game Over panel initially
+        GameOverPanel.SetActive(false); // Hide the Game Over panel initially
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        uiManager.gameOverPanel.SetActive(false); // Hide the Game Over panel initially
+        base.Start();
+        GameOverPanel.SetActive(false); // Hide the Game Over panel initially
         if (isMenu)
             return;
 
@@ -43,42 +42,27 @@ public class UIManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (isMenu)
             return;
 
         if (timerIsRunning)
         {
-            if (Level1Manager.time > 0)
+            if (time > 0)
             {
-                Level1Manager.time -= Time.deltaTime;
-                DisplayTime(Level1Manager.time);
+                time -= Time.deltaTime;
+                DisplayTime(time);
             }
             else
             {
                 Debug.Log("Time's up!");
-                Level1Manager.time = 0;
+                time = 0;
                 timerIsRunning = false;
                 SaveGameResults();
-                GameOver();
+                ToggleGameOver();
             }
-        }
-    }
-
-    public void GameOver()
-    {
-        scoreText.text = uiManager.points.ToString();
-        uiManager.gameOverPanel.SetActive(true);
-        if (uiManager.points > 0)
-        {
-            Debug.Log("You Win");
-            titleText.text = "You Win";
-        }
-        else
-        {
-            Debug.Log("Game Over");
-            titleText.text = "Game Over";
         }
     }
 
@@ -152,7 +136,7 @@ public class UIManager : MonoBehaviour
         string path = Directory.GetParent(Application.dataPath).FullName + "/GameResults.txt";
         string content = "Game Over!\n";
         content += "Points: " + points + "\n";
-        content += "Time Remaining: " + Mathf.FloorToInt(Level1Manager.time) + " seconds\n";
+        content += "Time Remaining: " + Mathf.FloorToInt(time) + " seconds\n";
         content += "Date: " + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
 
         File.WriteAllText(path, content);

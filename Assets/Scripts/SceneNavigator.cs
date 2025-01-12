@@ -3,27 +3,27 @@ using UnityEngine.SceneManagement;
 
 public class SceneNavigator : MonoBehaviour
 {
-  public void ToStart()
+  public static void ToStart()
   {
     SceneManager.LoadScene(SceneNameEnum.START_SCENE);
   }
-  public void ToAppearance()
+  public static void ToAppearance()
   {
     SceneManager.LoadScene(SceneNameEnum.APPEARANCE_SCENE);
   }
-  public void ToLevel()
+  public static void ToLevel()
   {
     SceneManager.LoadScene(SceneNameEnum.LEVEL_SCENE);
   }
-  public void ToLevel1()
+  public static void ToLevel1()
   {
     SceneManager.LoadScene(SceneNameEnum.LEVEL_1);
   }
-  public void ToLevel2()
+  public static void ToLevel2()
   {
     SceneManager.LoadScene(SceneNameEnum.LEVEL_2);
   }
-  public void ToLevel3()
+  public static void ToLevel3()
   {
     SceneManager.LoadScene(SceneNameEnum.LEVEL_3);
   }

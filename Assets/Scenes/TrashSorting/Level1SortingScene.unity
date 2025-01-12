@@ -2659,8 +2659,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e02936425a14a21846364d2247a1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreText: {fileID: 784570384}
+  ResultText: {fileID: 599291787}
+  gameOverPanel: {fileID: 156271811}
   pointCounter: {fileID: 2086690574}
-  points: 0
   timer: {fileID: 748717140}
   tooltips:
   - {fileID: 1779549807}
@@ -2668,10 +2670,6 @@ MonoBehaviour:
   - {fileID: 1571096619}
   - {fileID: 1040437811}
   trashManager: {fileID: 0}
-  gameOverPanel: {fileID: 156271811}
-  uiManager: {fileID: 352873261}
-  titleText: {fileID: 599291787}
-  scoreText: {fileID: 1072388592}
   canClick: 0
   uiDisableTime: 0.25
   isMenu: 0
