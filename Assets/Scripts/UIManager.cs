@@ -20,19 +20,20 @@ public class UIManager : LevelManager
 
     [SerializeField] bool isMenu = false;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (isMenu)
             return;
 
         DisplayTooltip(4, true, 0f);
-        gameOverPanel.SetActive(false); // Hide the Game Over panel initially
+        GameOverPanel.SetActive(false); // Hide the Game Over panel initially
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        gameOverPanel.SetActive(false); // Hide the Game Over panel initially
+        GameOverPanel.SetActive(false); // Hide the Game Over panel initially
         if (isMenu)
             return;
 
@@ -40,8 +41,9 @@ public class UIManager : LevelManager
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (isMenu)
             return;
 

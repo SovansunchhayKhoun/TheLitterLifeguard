@@ -12,14 +12,15 @@ class Level1Manager : LevelManager
     InitGame();
     // StartCoroutine(Countdown());
   }
-  void Update()
+  protected override void Update()
   {
+    base.Update();
     Countdown();
   }
 
   private void InitGame()
   {
-    time = 30f;
+    time = 3f;
     UpdateTimerDisplay();
   }
 
@@ -34,7 +35,6 @@ class Level1Manager : LevelManager
     else
     {
       // Game Over when timer hits 0
-      Debug.Log("Game over");
       ToggleGameOver();
     }
   }

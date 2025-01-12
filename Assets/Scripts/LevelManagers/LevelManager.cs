@@ -6,7 +6,68 @@ public abstract class LevelManager : MonoBehaviour
 {
   public TextMeshProUGUI ScoreText;
   public TextMeshProUGUI ResultText;
-  public GameObject gameOverPanel;
+  public GameObject GameOverPanel;
+
+  public GameObject SettingPanel;
+  private bool isOpen = false;
+  protected virtual void Awake()
+  {
+    isOpen = !isOpen;
+    ToggleMenu();
+  }
+  protected virtual void Update()
+  {
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+      ToggleMenu();
+    }
+  }
+  void ToggleMenu()
+  {
+    isOpen = !isOpen;
+    SettingPanel.SetActive(isOpen);
+
+    if (isOpen)
+    {
+      Time.timeScale = 0;
+      Cursor.lockState = CursorLockMode.None;
+    }
+    else
+    {
+      Time.timeScale = 1;
+      Cursor.lockState = CursorLockMode.Locked;
+    }
+  }
+  public void Resume()
+  {
+    Debug.Log("Resume");
+    isOpen = false;
+    SettingPanel.SetActive(false);
+    Time.timeScale = 1;
+    Cursor.lockState = CursorLockMode.Locked;
+  }
+  public void Exit()
+  {
+    // SceneNavigator.ToLevel();
+    Time.timeScale = 1;
+    Application.Quit();
+  }
+
+  public void ToggleGameOver()
+  {
+    ScoreText.text = UIManager.points.ToString();
+    GameOverPanel.SetActive(true);
+
+    StopSceneAndFocus();
+    if (UIManager.points > 0)
+    {
+      ResultText.text = "You Win";
+    }
+    else
+    {
+      ResultText.text = "Game Over";
+    }
+  }
   void StopSceneAndFocus()
   {
     // Pause the game
@@ -19,7 +80,7 @@ public abstract class LevelManager : MonoBehaviour
     Cursor.visible = true; // Hides the cursor
   }
 
-  void ToggleScriptState<T>(bool enabled) where T : MonoBehaviour
+  private void ToggleScriptState<T>(bool enabled) where T : MonoBehaviour
   {
     var controller = FindObjectOfType<T>();
     if (controller != null)
@@ -39,47 +100,6 @@ public abstract class LevelManager : MonoBehaviour
     foreach (var animator in animators)
     {
       animator.enabled = false;
-    }
-  }
-  public void ResumeScene()
-  {
-    // Unpause the game
-    Time.timeScale = 1;
-
-    // Hide the panel
-    gameOverPanel.SetActive(false);
-
-    // Re-enable scene objects
-    EnableSceneObjects();
-  }
-  void EnableSceneObjects()
-  {
-    ToggleScriptState<PlayerController>(true);
-    ToggleScriptState<CameraSwitch>(true);
-    ToggleScriptState<FishingRodSfx>(true);
-
-    // Re-enable animations if disabled
-    var animators = FindObjectsOfType<Animator>();
-    foreach (var animator in animators)
-    {
-      animator.enabled = true;
-    }
-  }
-  public void ToggleGameOver()
-  {
-    ScoreText.text = UIManager.points.ToString();
-    gameOverPanel.SetActive(true);
-
-    StopSceneAndFocus();
-    if (UIManager.points > 0)
-    {
-      Debug.Log("You Win");
-      ResultText.text = "You Win";
-    }
-    else
-    {
-      Debug.Log("Game Over");
-      ResultText.text = "Game Over";
     }
   }
 }
