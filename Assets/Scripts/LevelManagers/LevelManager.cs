@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 public abstract class LevelManager : MonoBehaviour
 {
+  public static float time;
+  public Text TimerText;
   public TextMeshProUGUI ScoreText;
   public TextMeshProUGUI ResultText;
   public GameObject GameOverPanel;
-
   public GameObject SettingPanel;
+
   private bool isOpen = false;
   protected virtual void Awake()
   {
@@ -21,6 +23,12 @@ public abstract class LevelManager : MonoBehaviour
     {
       ToggleMenu();
     }
+    Countdown();
+  }
+  protected virtual void Start()
+  {
+    UpdateTimerDisplay();
+    time = 30f;
   }
   void ToggleMenu()
   {
@@ -36,6 +44,26 @@ public abstract class LevelManager : MonoBehaviour
     {
       Time.timeScale = 1;
       Cursor.lockState = CursorLockMode.Locked;
+    }
+  }
+  private void UpdateTimerDisplay()
+  {
+    int minutes = (int)(time / 60);
+    int seconds = (int)(time % 60);
+    TimerText.text = $"{minutes}mn{seconds:D2}s";  // D2 formats seconds to always show 2 digits
+  }
+  private void Countdown()
+  {
+    if (time > 0)
+    {
+      // yield return new WaitForSeconds(1f);
+      time -= Time.deltaTime;
+      UpdateTimerDisplay();
+    }
+    else
+    {
+      // Game Over when timer hits 0
+      ToggleGameOver();
     }
   }
   public void Resume()

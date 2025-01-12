@@ -31,8 +31,9 @@ public class UIManager : LevelManager
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         GameOverPanel.SetActive(false); // Hide the Game Over panel initially
         if (isMenu)
             return;
@@ -49,15 +50,15 @@ public class UIManager : LevelManager
 
         if (timerIsRunning)
         {
-            if (Level1Manager.time > 0)
+            if (time > 0)
             {
-                Level1Manager.time -= Time.deltaTime;
-                DisplayTime(Level1Manager.time);
+                time -= Time.deltaTime;
+                DisplayTime(time);
             }
             else
             {
                 Debug.Log("Time's up!");
-                Level1Manager.time = 0;
+                time = 0;
                 timerIsRunning = false;
                 SaveGameResults();
                 ToggleGameOver();
@@ -135,7 +136,7 @@ public class UIManager : LevelManager
         string path = Directory.GetParent(Application.dataPath).FullName + "/GameResults.txt";
         string content = "Game Over!\n";
         content += "Points: " + points + "\n";
-        content += "Time Remaining: " + Mathf.FloorToInt(Level1Manager.time) + " seconds\n";
+        content += "Time Remaining: " + Mathf.FloorToInt(time) + " seconds\n";
         content += "Date: " + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
 
         File.WriteAllText(path, content);
