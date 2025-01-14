@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public abstract class GameplayManager : MonoBehaviour
 {
   public List<GameObject> trashParent = new List<GameObject>();
-  public static GameplayManager Instance;
   public static float time;
   public Text TimerText;
   public TextMeshProUGUI ScoreText;
@@ -53,16 +52,6 @@ public abstract class GameplayManager : MonoBehaviour
 
   protected virtual void Awake()
   {
-    if (Instance == null)
-    {
-      Instance = this;
-      DontDestroyOnLoad(gameObject);
-    }
-    else
-    {
-      Destroy(gameObject);
-    }
-
     isOpen = !isOpen;
     ToggleMenu();
   }
