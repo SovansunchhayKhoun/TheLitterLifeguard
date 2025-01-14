@@ -78,11 +78,13 @@ public abstract class GameplayManager : MonoBehaviour
     {
       Time.timeScale = 0;
       Cursor.lockState = CursorLockMode.None;
+      Cursor.visible = true;
     }
     else
     {
       Time.timeScale = 1;
       Cursor.lockState = CursorLockMode.Locked;
+      Cursor.visible = false;
     }
   }
   private void UpdateTimerDisplay()
@@ -112,6 +114,7 @@ public abstract class GameplayManager : MonoBehaviour
     SettingPanel.SetActive(false);
     Time.timeScale = 1;
     Cursor.lockState = CursorLockMode.Locked;
+    Cursor.visible = false;
   }
   public void Exit()
   {

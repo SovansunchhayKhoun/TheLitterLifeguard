@@ -10,11 +10,11 @@ public class InstructionManager : MonoBehaviour
     void Start()
     {
         ShowPanel(0); // Show the first panel at the start
-        Time.timeScale = 0;
     }
 
     public void ShowPanel(int index)
     {
+        Time.timeScale = 0;
         for (int i = 0; i < panels.Length; i++)
         {
             panels[i].SetActive(i == index);
@@ -22,8 +22,8 @@ public class InstructionManager : MonoBehaviour
         currentPanelIndex = index;
 
         // Enable cursor for UI interaction
-        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void NextPanel()
@@ -52,8 +52,8 @@ public class InstructionManager : MonoBehaviour
         Time.timeScale = 1; // Resume game time
 
         // Disable cursor for gameplay
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void ShowInstructions()

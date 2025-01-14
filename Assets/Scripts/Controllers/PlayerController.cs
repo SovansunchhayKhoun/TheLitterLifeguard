@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 10f;
         rotationSpeed = 720f;
         jumpForce = 5f;
-        fppMouseSensitivity = 150f;
+        fppMouseSensitivity = 50f;
 
     }
 
