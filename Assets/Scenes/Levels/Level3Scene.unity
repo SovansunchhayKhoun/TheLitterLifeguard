@@ -1303,9 +1303,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Trash number : 16
+  m_text: 'Trash Count : 26
 
-    Time : 1 min 30 seconds'
+    Time : 1 min'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06c8a39c8f39c404e8a7b0ae807de1a8, type: 2}
   m_sharedMaterial: {fileID: 9032357986648268897, guid: 06c8a39c8f39c404e8a7b0ae807de1a8, type: 2}
@@ -3815,7 +3815,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Level 3
 
-    "Basic Fishing"'
+    "Fishing Basics"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06c8a39c8f39c404e8a7b0ae807de1a8, type: 2}
   m_sharedMaterial: {fileID: 9032357986648268897, guid: 06c8a39c8f39c404e8a7b0ae807de1a8, type: 2}
@@ -18262,7 +18262,6 @@ MonoBehaviour:
   - {fileID: 1912614731}
   - {fileID: 2115614205}
   - {fileID: 820386907}
-  CaughtObjects: []
   TimerText: {fileID: 1955407432}
   ScoreText: {fileID: 1488516935}
   ResultText: {fileID: 1660788671}
