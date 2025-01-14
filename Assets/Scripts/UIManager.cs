@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 
-public class UIManager : GameplayManager
+public class UIManager : MonoBehaviour
 {
     [SerializeField] TMP_Text pointCounter;
     public static int points = 0;
+    public Text TimerText;
     // [SerializeField] TMP_Text timer;
     private bool timerIsRunning = false;
     [SerializeField] GameObject[] tooltips;
@@ -19,9 +21,12 @@ public class UIManager : GameplayManager
 
     [SerializeField] bool isMenu = false;
 
-    protected override void Awake()
+    public GameObject GameOverPanel;
+    public TextMeshProUGUI ResultText;
+    public TextMeshProUGUI ScoreText;
+
+    void Awake()
     {
-        base.Awake();
         if (isMenu)
             return;
 
@@ -30,41 +35,96 @@ public class UIManager : GameplayManager
     }
 
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        base.Start();
         GameOverPanel.SetActive(false); // Hide the Game Over panel initially
         if (isMenu)
             return;
 
         timerIsRunning = true;
+        UpdateTimerDisplay();
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
         if (isMenu)
             return;
 
         if (timerIsRunning)
         {
-            if (time > 0)
+            if (GameplayManager.time > 0)
             {
-                time -= Time.deltaTime;
+                GameplayManager.time -= Time.deltaTime;
                 // DisplayTime(time);
+                UpdateTimerDisplay();
             }
             else
             {
                 Debug.Log("Time's up!");
-                time = 0;
+                GameplayManager.time = 0;
                 timerIsRunning = false;
                 SaveGameResults();
                 ToggleGameOver();
             }
         }
     }
+    private void UpdateTimerDisplay()
+    {
+        int minutes = (int)(GameplayManager.time / 60);
+        int seconds = (int)(GameplayManager.time % 60);
+        TimerText.text = $"{minutes}mn{seconds:D2}s";  // D2 formats seconds to always show 2 digits
+    }
 
+    public void ToggleGameOver()
+    {
+        ScoreText.text = UIManager.points.ToString();
+        GameOverPanel.SetActive(true);
+
+        StopSceneAndFocus();
+        if (UIManager.points > 0)
+        {
+            ResultText.text = "You Win";
+        }
+        else
+        {
+            ResultText.text = "Game Over";
+        }
+    }
+
+    void StopSceneAndFocus()
+    {
+        // Pause the game
+        Time.timeScale = 0;
+
+        // Disable other scene objects (optional)
+        DisableSceneObjects();
+
+        Cursor.lockState = CursorLockMode.None; // Locks cursor to the center of the screen
+        Cursor.visible = true; // Hides the cursor
+    }
+
+    void DisableSceneObjects()
+    {
+        ToggleScriptState<PlayerController>(false);
+        ToggleScriptState<CameraSwitch>(false);
+        ToggleScriptState<FishingRodSfx>(false);
+
+        // Disable animations
+        var animators = FindObjectsOfType<Animator>();
+        foreach (var animator in animators)
+        {
+            animator.enabled = false;
+        }
+    }
+    private void ToggleScriptState<T>(bool enabled) where T : MonoBehaviour
+    {
+        var controller = FindObjectOfType<T>();
+        if (controller != null)
+        {
+            controller.enabled = enabled;
+        }
+    }
     //procedure for tooltip when gotten wrong
     //procedure for intial tooltip that plays at the start of the game
 
@@ -135,7 +195,7 @@ public class UIManager : GameplayManager
         string path = Directory.GetParent(Application.dataPath).FullName + "/GameResults.txt";
         string content = "Game Over!\n";
         content += "Points: " + points + "\n";
-        content += "Time Remaining: " + Mathf.FloorToInt(time) + " seconds\n";
+        content += "Time Remaining: " + Mathf.FloorToInt(GameplayManager.time) + " seconds\n";
         content += "Date: " + System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
 
         File.WriteAllText(path, content);
