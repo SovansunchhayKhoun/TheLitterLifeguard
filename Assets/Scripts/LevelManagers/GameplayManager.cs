@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public abstract class GameplayManager : MonoBehaviour
 {
+  public Text TrashLeftText;
   public List<GameObject> trashParent = new List<GameObject>();
   public static float time;
   public Text TimerText;
@@ -24,7 +25,7 @@ public abstract class GameplayManager : MonoBehaviour
     {
       numTrash += trashParent[i].transform.childCount;
     }
-
+    TrashLeftText.text = numTrash.ToString();
     if (numTrash == 0)
     {
       StartCoroutine(WaitForNextScene(1.5f));

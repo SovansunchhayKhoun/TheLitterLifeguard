@@ -13,12 +13,12 @@ public class UIManager : MonoBehaviour
     public static int points = 0;
     public Text TimerText;
     // [SerializeField] TMP_Text timer;
-    private bool timerIsRunning = false;
+    public static bool timerIsRunning = false;
     [SerializeField] GameObject[] tooltips;
     [SerializeField] TrashInteract trashManager;
     public bool canClick = false;
     public float uiDisableTime = 0.25f;
-
+    public TextMeshProUGUI LeftOverTrashText;
     [SerializeField] bool isMenu = false;
 
     public GameObject GameOverPanel;
@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
             return;
 
         timerIsRunning = true;
+        points = 0;
         UpdateTimerDisplay();
     }
 
@@ -51,6 +52,7 @@ public class UIManager : MonoBehaviour
         if (isMenu)
             return;
 
+        UpdateLeftOverTrash();
         if (timerIsRunning)
         {
             if (GameplayManager.time > 0)
@@ -67,6 +69,27 @@ public class UIManager : MonoBehaviour
                 SaveGameResults();
                 ToggleGameOver();
             }
+        }
+
+        if (NewTrash.isGameOver)
+        {
+            SaveGameResults();
+            ToggleGameOver();
+        }
+    }
+    private void UpdateLeftOverTrash()
+    {
+        switch (LevelManager.selectedLevel)
+        {
+            case 1:
+                LeftOverTrashText.text = (Level1Manager.NumTrash - points).ToString();
+                break;
+            case 2:
+                LeftOverTrashText.text = (Level2Manager.NumTrash - points).ToString();
+                break;
+            case 3:
+                LeftOverTrashText.text = (Level3Manager.NumTrash - points).ToString();
+                break;
         }
     }
     private void UpdateTimerDisplay()

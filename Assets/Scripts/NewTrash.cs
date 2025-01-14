@@ -12,6 +12,7 @@ public class NewTrash : MonoBehaviour
     public int trashType;
     [SerializeField] Transform spawnPoint;
     public GameObject trash;
+    public static bool isGameOver;
 
     public GameObject[] bins;
     public string[] anims;
@@ -23,12 +24,25 @@ public class NewTrash : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         MakeNewTrash();
+
+        isGameOver = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (LevelManager.selectedLevel == 1 && (UIManager.points >= Level1Manager.NumTrash || !UIManager.timerIsRunning))
+        {
+            isGameOver = true;
+        }
+        if (LevelManager.selectedLevel == 2 && (UIManager.points >= Level2Manager.NumTrash || !UIManager.timerIsRunning))
+        {
+            isGameOver = true;
+        }
+        if (LevelManager.selectedLevel == 3 && (UIManager.points >= Level3Manager.NumTrash || !UIManager.timerIsRunning))
+        {
+            isGameOver = true;
+        }
     }
 
 
