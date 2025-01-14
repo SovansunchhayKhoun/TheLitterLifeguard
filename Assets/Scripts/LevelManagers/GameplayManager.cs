@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -5,9 +7,8 @@ using UnityEngine.UI;
 
 public abstract class GameplayManager : MonoBehaviour
 {
+  public List<GameObject> trashParent = new List<GameObject>();
   public static GameplayManager Instance;
-  public List<GameObject> CaughtObjects = new List<GameObject>();
-
   public static float time;
   public Text TimerText;
   public TextMeshProUGUI ScoreText;
@@ -16,6 +17,40 @@ public abstract class GameplayManager : MonoBehaviour
   public GameObject SettingPanel;
 
   private bool isOpen = false;
+
+  void CheckTrashInGame()
+  {
+    int numTrash = 0;
+    for (int i = 0; i < trashParent.Count; i++)
+    {
+      numTrash += trashParent[i].transform.childCount;
+    }
+
+    if (numTrash == 0)
+    {
+      StartCoroutine(WaitForNextScene(1.5f));
+    }
+  }
+
+  private IEnumerator WaitForNextScene(float delay)
+  {
+    yield return new WaitForSeconds(delay);
+    switch (LevelManager.selectedLevel)
+    {
+      case 1:
+        SceneNavigator.ToLevel1SortingScene();
+        break;
+      case 2:
+        SceneNavigator.ToLevel2SortingScene();
+        break;
+      case 3:
+        SceneNavigator.ToLevel3SortingScene();
+        break;
+      default:
+        throw new NotImplementedException();
+    }
+  }
+
   protected virtual void Awake()
   {
     if (Instance == null)
@@ -38,6 +73,7 @@ public abstract class GameplayManager : MonoBehaviour
       ToggleMenu();
     }
     Countdown();
+    CheckTrashInGame();
   }
   protected virtual void Start()
   {

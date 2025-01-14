@@ -10,7 +10,6 @@ class Level1Manager : GameplayManager
   {
     base.Start();
     InitGame();
-    // StartCoroutine(Countdown());
   }
 
   private void InitGame()

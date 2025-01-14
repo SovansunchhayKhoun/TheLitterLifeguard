@@ -104,14 +104,9 @@ public class VerletLine : MonoBehaviour
         }
     }
 
-    private async void AttachTrash(GameObject attachedObject)
+    private void AttachTrash(GameObject attachedObject)
     {
         var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale 
-        if (GameplayManager.Instance != null)
-        {
-            GameplayManager.Instance.CaughtObjects.Add(attachedObject);
-            Debug.Log(GameplayManager.Instance.CaughtObjects.Count);
-        }
 
         attachedObject.transform.SetParent(EndPoint);
         attachedObject.transform.localPosition = Vector3.zero; // Reset local position
@@ -129,35 +124,6 @@ public class VerletLine : MonoBehaviour
         if (attachedRigidbody != null)
         {
             attachedRigidbody.isKinematic = true;
-
-            // Allow time fow line to render
-            await Task.Delay(1500);
-            switch (LevelManager.selectedLevel)
-            {
-                case 1:
-                    if (GameplayManager.Instance.CaughtObjects.Count >= Level1Manager.NumTrash - 1)
-                    {
-                        CaughtObjectStorage.SaveCaughtObjects(GameplayManager.Instance.CaughtObjects);
-                        SceneNavigator.ToLevel1SortingScene();
-                    }
-                    break;
-                case 2:
-                    if (GameplayManager.Instance.CaughtObjects.Count >= Level2Manager.NumTrash - 1)
-                    {
-                        CaughtObjectStorage.SaveCaughtObjects(GameplayManager.Instance.CaughtObjects);
-                        SceneNavigator.ToLevel2SortingScene();
-                    }
-                    break;
-                case 3:
-                    if (GameplayManager.Instance.CaughtObjects.Count >= Level3Manager.NumTrash - 1)
-                    {
-                        CaughtObjectStorage.SaveCaughtObjects(GameplayManager.Instance.CaughtObjects);
-                        SceneNavigator.ToLevel3SortingScene();
-                    }
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
         }
     }
 

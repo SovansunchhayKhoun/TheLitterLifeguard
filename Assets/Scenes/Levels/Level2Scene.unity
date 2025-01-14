@@ -12659,6 +12659,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0823c0aae8e90e14498bda27a956da4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trashParent:
+  - {fileID: 1114372846}
+  - {fileID: 1237824094}
+  - {fileID: 1673034141}
+  CaughtObjects: []
   TimerText: {fileID: 404895173}
   ScoreText: {fileID: 685774385}
   ResultText: {fileID: 1744590543}
