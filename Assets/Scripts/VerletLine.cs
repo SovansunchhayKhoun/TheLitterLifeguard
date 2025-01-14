@@ -103,9 +103,15 @@ public class VerletLine : MonoBehaviour
             }
         }
     }
+
     private async void AttachTrash(GameObject attachedObject)
     {
-        var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale
+        var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale 
+        if (GameplayManager.Instance != null)
+        {
+            GameplayManager.Instance.CaughtObjects.Add(attachedObject);
+            Debug.Log(GameplayManager.Instance.CaughtObjects.Count);
+        }
 
         attachedObject.transform.SetParent(EndPoint);
         attachedObject.transform.localPosition = Vector3.zero; // Reset local position
@@ -129,13 +135,25 @@ public class VerletLine : MonoBehaviour
             switch (LevelManager.selectedLevel)
             {
                 case 1:
-                    SceneNavigator.ToLevel1SortingScene();
+                    if (GameplayManager.Instance.CaughtObjects.Count >= Level1Manager.NumTrash - 1)
+                    {
+                        CaughtObjectStorage.SaveCaughtObjects(GameplayManager.Instance.CaughtObjects);
+                        SceneNavigator.ToLevel1SortingScene();
+                    }
                     break;
                 case 2:
-                    SceneNavigator.ToLevel2SortingScene();
+                    if (GameplayManager.Instance.CaughtObjects.Count >= Level2Manager.NumTrash - 1)
+                    {
+                        CaughtObjectStorage.SaveCaughtObjects(GameplayManager.Instance.CaughtObjects);
+                        SceneNavigator.ToLevel2SortingScene();
+                    }
                     break;
                 case 3:
-                    SceneNavigator.ToLevel3SortingScene();
+                    if (GameplayManager.Instance.CaughtObjects.Count >= Level3Manager.NumTrash - 1)
+                    {
+                        CaughtObjectStorage.SaveCaughtObjects(GameplayManager.Instance.CaughtObjects);
+                        SceneNavigator.ToLevel3SortingScene();
+                    }
                     break;
                 default:
                     throw new NotImplementedException();

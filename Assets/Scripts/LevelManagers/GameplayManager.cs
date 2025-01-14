@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class GameplayManager : MonoBehaviour
 {
+  public static GameplayManager Instance;
+  public List<GameObject> CaughtObjects = new List<GameObject>();
+
   public static float time;
   public Text TimerText;
   public TextMeshProUGUI ScoreText;
@@ -14,6 +18,16 @@ public abstract class GameplayManager : MonoBehaviour
   private bool isOpen = false;
   protected virtual void Awake()
   {
+    if (Instance == null)
+    {
+      Instance = this;
+      DontDestroyOnLoad(gameObject);
+    }
+    else
+    {
+      Destroy(gameObject);
+    }
+
     isOpen = !isOpen;
     ToggleMenu();
   }

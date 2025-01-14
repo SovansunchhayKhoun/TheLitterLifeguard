@@ -33,6 +33,11 @@ public class UIManager : GameplayManager
     protected override void Start()
     {
         base.Start();
+        Debug.Log("ui manager");
+        foreach (GameObject gameObject in GameplayManager.Instance.CaughtObjects)
+        {
+            Debug.Log(gameObject.name);
+        }
         GameOverPanel.SetActive(false); // Hide the Game Over panel initially
         if (isMenu)
             return;
