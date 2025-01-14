@@ -3027,7 +3027,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349291639}
   serializedVersion: 4
-  m_Mass: 30
+  m_Mass: 70
   m_Drag: 1
   m_AngularDrag: 0.1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -14713,7 +14713,9 @@ MonoBehaviour:
   trashParent:
   - {fileID: 1114372846}
   - {fileID: 1237824094}
+  - {fileID: 782939091}
   - {fileID: 1673034141}
+  - {fileID: 1934347793}
   TimerText: {fileID: 404895173}
   ScoreText: {fileID: 685774385}
   ResultText: {fileID: 1744590543}
