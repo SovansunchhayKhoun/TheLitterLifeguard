@@ -103,9 +103,10 @@ public class VerletLine : MonoBehaviour
             }
         }
     }
-    private async void AttachTrash(GameObject attachedObject)
+
+    private void AttachTrash(GameObject attachedObject)
     {
-        var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale
+        var originalLossyScale = attachedObject.transform.lossyScale; // Store lossy scale 
 
         attachedObject.transform.SetParent(EndPoint);
         attachedObject.transform.localPosition = Vector3.zero; // Reset local position
@@ -123,23 +124,6 @@ public class VerletLine : MonoBehaviour
         if (attachedRigidbody != null)
         {
             attachedRigidbody.isKinematic = true;
-
-            // Allow time fow line to render
-            await Task.Delay(1500);
-            switch (LevelManager.selectedLevel)
-            {
-                case 1:
-                    SceneNavigator.ToLevel1SortingScene();
-                    break;
-                case 2:
-                    SceneNavigator.ToLevel2SortingScene();
-                    break;
-                case 3:
-                    SceneNavigator.ToLevel3SortingScene();
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
         }
     }
 
